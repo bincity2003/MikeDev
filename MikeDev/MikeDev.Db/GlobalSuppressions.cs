@@ -12,4 +12,3 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalSelectCommand(System.String[])~System.String[][]")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalFieldNameValidator(System.String[])")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalGetIndex(System.String)~System.String")]
-
