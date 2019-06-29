@@ -17,8 +17,8 @@ namespace MikeDev.Test
                 "Name",
                 "Age"
             });
-            Assert.IsTrue(obj.FieldNames == new string[] { "Name", "Age" });
-            Assert.IsFalse(obj.FieldNames == new string[] { "Name", "age" });
+            Assert.IsTrue(obj.FieldNames[0] == "Name");
+            Assert.IsFalse(obj.FieldNames[1] != "Age");
             Assert.IsTrue(obj.Count == 2);
         }
     }

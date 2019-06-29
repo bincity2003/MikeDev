@@ -36,7 +36,7 @@ namespace MikeDev.DB
         public string[] GetEntriesNames => _EntryNames.Keys.ToArray();
 
         /// <summary>
-        /// Get an array containing columns' name.
+        /// Get an array containing fields.
         /// </summary>
         public string[] FieldNames { get; private set; }
 
@@ -83,9 +83,9 @@ namespace MikeDev.DB
             {
                 throw new ArgumentException("Rows or columns' name must not be empty!");
             }
-            if (fieldNames[0] != "Names")
+            if (fieldNames[0] != "Name")
             {
-                throw new DbTableException("First element must be 'Names'!");
+                throw new DbTableException("First element must be 'Name'!");
             }
 
             _InternalFieldNameValidator(fieldNames);
