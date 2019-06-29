@@ -16,7 +16,7 @@ namespace MikeDev.DB
         #region Internal holder
 
         private Dictionary<string, int> _EntryNames;                                        // Internal storage for entries' name
-        private Dictionary<int, string[]> _DataTable = new Dictionary<int, string[]>();     // Primary storage for entries
+        private Dictionary<int, string[]> _DataTable;     // Primary storage for entries
 
         #endregion
 
@@ -79,8 +79,15 @@ namespace MikeDev.DB
             {
                 throw new DbTableException("First element must be 'Names'!");
             }
+     
+            _InternalFieldNameValidator(fieldNames);
             FieldNames = fieldNames;
+
+            _DataTable = new Dictionary<int, string[]>();
+            _EntryNames = new Dictionary<string, int>();
         }
+
+        
 
         /// <summary>
         /// Read existing DbKeeper instance from file.
@@ -212,8 +219,10 @@ namespace MikeDev.DB
 
             // Copying data (need to be added more in the future)
             _EntryNames = holder._EntryNames;
+            _InternalFieldNameValidator(holder.FieldNames);
             FieldNames = holder.FieldNames;
             _DataTable = holder._DataTable;
+
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
@@ -221,7 +230,7 @@ namespace MikeDev.DB
         {
             // Prepare
             string[][] result;
-            string[] Partition = command.ToUpper().Split(' ');
+            string[] Partition = command.Split(' ');
 
             switch (Partition[0])                                       // Command identifier
             {
@@ -244,18 +253,18 @@ namespace MikeDev.DB
             // Token list
             List<string> Tokens = new List<string>();
 
-            // Scan for token in partition
+            // Scan for tokens in partition
             foreach (var part in parts)
             {
                 switch (part)
                 {
-                    case "DELETE":
+                    case var p when new Regex(@"[Dd][Ee][Ll][Ee][Tt][Ee]").IsMatch(p):
                         Tokens.Add("command_delete");
                         break;
                     case "*":
-                        Tokens.Add("character_wildcard");
+                        Tokens.Add("wildcard");
                         break;
-                    case "WHERE":
+                    case var p when new Regex(@"[Ww][Hh][Ee][Rr][Ee]").IsMatch(p):
                         Tokens.Add("constraints");
                         break;
                     case var p when new Regex(@"(<[=>]?|==|>=?|\&\&|\|\|)").IsMatch(p):
@@ -270,10 +279,19 @@ namespace MikeDev.DB
                     case ")":
                         Tokens.Add("character_rightparen");
                         break;
+                    case var p when new Regex(@"\$[a-zA-Z][0-9a-zA-Z]{0,30}").IsMatch(p):
+                        Tokens.Add($"fieldname_{part}");
+                        break;
                     default:
-                        Tokens.Add($"identifier_{part}");
+                        Tokens.Add($"word_{part}");
                         break;
                 }
+            }
+
+            // Parse tokens (to be implemented)
+            foreach (var token in Tokens)
+            {
+
             }
             throw new NotImplementedException();
         }
@@ -289,13 +307,13 @@ namespace MikeDev.DB
             {
                 switch (part)
                 {
-                    case "SELECT":
+                    case var p when new Regex(@"[Ss][Ee][Ll][Ee][Cc][Tt]").IsMatch(p):
                         Tokens.Add("commmand_select");
                         break;
                     case "*":
                         Tokens.Add("character_wildcard");
                         break;
-                    case "WHERE":
+                    case var p when new Regex(@"[Ww][Hh][Ee][Rr][Ee]").IsMatch(p):
                         Tokens.Add("constraints");
                         break;
                     case var p when new Regex(@"(<[=>]?|==|>=?|\&\&|\|\|)").IsMatch(p):
@@ -310,14 +328,29 @@ namespace MikeDev.DB
                     case ")":
                         Tokens.Add("character_rightparen");
                         break;
+                    case var p when new Regex(@"\$[a-zA-Z][0-9a-zA-Z]{0,30}").IsMatch(p):
+                        Tokens.Add($"fieldname_{part}");
+                        break;
                     default:
-                        Tokens.Add($"identifier_{part}");
+                        Tokens.Add($"word_{part}");
                         break;
                 }
             }
 
             // Parse token (to be implemented)
             throw new NotImplementedException();
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
+        private void _InternalFieldNameValidator(string[] fieldNames)
+        {
+            foreach (var item in fieldNames)
+            {
+                if (!new Regex("[a-zA-Z][0-9a-zA-Z]{0,30}").IsMatch(item))
+                {
+                    throw new DbTableException($"Invalid field name: {item}");
+                }
+            }
         }
 
         #endregion
