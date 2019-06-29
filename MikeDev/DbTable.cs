@@ -87,8 +87,6 @@ namespace MikeDev.DB
             _EntryNames = new Dictionary<string, int>();
         }
 
-
-
         /// <summary>
         /// Read existing DbKeeper instance from file.
         /// </summary>
@@ -137,11 +135,7 @@ namespace MikeDev.DB
                 }
             }
 
-            // Add to index
-            _EntryNames.Add(name, _EntryNames.Count);
-
-            // Add entry to table
-            _DataTable.Add(_EntryNames.Count - 1, values);
+            _InternalAddEntry(name, values);
         }
 
         /// <summary>
@@ -153,7 +147,11 @@ namespace MikeDev.DB
         {
             if (name.Length != values.Length)
             {
-
+                throw new DbTableException($"Length not match: {name.Length} versus {values.Length}");
+            }
+            for (int i = 0; i < name.Length; i++)
+            {
+                AddEntry(name[i], values[i]);
             }
         }
 
@@ -162,6 +160,91 @@ namespace MikeDev.DB
         /// </summary>
         /// <param name="name">The name of the entry to be removed.</param>
         public void RemoveEntry(string name)
+        {
+            _InternalRemoveEntry(name);
+        }
+
+        /// <summary>
+        /// Remove multiple existing entries.
+        /// </summary>
+        /// <param name="name">The name of the entries to be removed.</param>
+        public void RemoveEntry(string[] name)
+        {
+            foreach (var item in name)
+            {
+                RemoveEntry(item);
+            }
+        }
+
+        /// <summary>
+        /// Replace an existing entry.
+        /// </summary>
+        /// <param name="name">The name of the entry to be replaced.</param>
+        /// <param name="values">The new set of fields' value.</param>
+        public void ReplaceEntry(string name, params string[] values)
+        {
+            _InternalReplaceEntry(name, values, out int Index);
+            _DataTable[Index] = values;
+        }
+
+        /// <summary>
+        /// Replace multiple existing entry.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="values"></param>
+        public void ReplaceEntry(string[] name, params string[][] values)
+        {
+            if (name.Length != values.Length)
+            {
+                throw new DbTableException($"Length not match: {name.Length} versus {values.Length}");
+            }
+            for (int i = 0; i < name.Length; i++)
+            {
+                ReplaceEntry(name[i], values[i]);
+            }
+        }
+
+        /// <summary>
+        /// Execute advanced command, including filter.
+        /// </summary>
+        /// <param name="command">Command to be executed.</param>
+        /// <returns>An array of String array (fields).</returns>
+        public string[][] Execute(string command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            return _InternalExecutionEngine(command);
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        private void _InternalLoadInstance(string jsonData)
+        {
+            // Deserialize object
+            DbTable holder = JsonConvert.DeserializeObject<DbTable>(jsonData);
+
+            // Copying data (need to be added more in the future)
+            _EntryNames = holder._EntryNames;
+            _InternalFieldNameValidator(holder.FieldNames);
+            FieldNames = holder.FieldNames;
+            _DataTable = holder._DataTable;
+        }
+
+        private void _InternalAddEntry(string name, string[] values)
+        {
+            // Add to index
+            _EntryNames.Add(name, _EntryNames.Count);
+
+            // Add entry to table
+            _DataTable.Add(_EntryNames.Count - 1, values);
+        }
+
+        private void _InternalRemoveEntry(string name)
+#pragma warning restore IDE1006 // Naming Styles
         {
             try
             {
@@ -175,56 +258,22 @@ namespace MikeDev.DB
             }
         }
 
-        /// <summary>
-        /// Replace an existing entry.
-        /// </summary>
-        /// <param name="name">The name of the entry to be replaced.</param>
-        /// <param name="values">The new set of fields' value.</param>
-        public void ReplaceEntry(string name, params string[] values)
+        private void _InternalReplaceEntry(string name, string[] values, out int Index)
         {
             try
             {
-                int Index = _EntryNames[name];
-                _DataTable[Index] = values;
+                Index = _EntryNames[name];
             }
             catch (KeyNotFoundException)
             {
                 throw new DbTableException("Entry not found!");
             }
-        }
-
-        /// <summary>
-        /// Filter results from DbTable.
-        /// </summary>
-        /// <param name="command">Command to be executed.</param>
-        /// <returns>An array of String array (fields).</returns>
-        public string[][] Filter(string command)
-        {
-            if (command is null)
+            if (values.Length != Count)
             {
-                throw new ArgumentNullException(nameof(command));
+                throw new DbTableException("Number of values provided doesn't match number of field");
             }
-            return _InternalExecutionEngine(command);
         }
 
-        #endregion
-
-        #region Internal methods
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
-        private void _InternalLoadInstance(string jsonData)
-        {
-            // Deserialize object
-            DbTable holder = JsonConvert.DeserializeObject<DbTable>(jsonData);
-
-            // Copying data (need to be added more in the future)
-            _EntryNames = holder._EntryNames;
-            _InternalFieldNameValidator(holder.FieldNames);
-            FieldNames = holder.FieldNames;
-            _DataTable = holder._DataTable;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private string[][] _InternalExecutionEngine(string command)
         {
             // Prepare
@@ -233,10 +282,10 @@ namespace MikeDev.DB
 
             switch (Partition[0])                                       // Command identifier
             {
-                case "SELECT":
+                case var p when new Regex(@"[Ss][Ee][Ll][Ee][Cc][Tt]").IsMatch(p):
                     result = _InternalSelectCommand(Partition);
                     break;
-                case "DELETE":
+                case var p when new Regex(@"[Dd][Ee][Ll][Ee][Tt][Ee]").IsMatch(p):
                     result = _InternalDeleteCommand(Partition);
                     break;
                 default:                                                // Default (error)
@@ -246,7 +295,6 @@ namespace MikeDev.DB
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private string[][] _InternalDeleteCommand(string[] parts)
         {
             // Token list
@@ -295,7 +343,6 @@ namespace MikeDev.DB
             throw new NotImplementedException();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private string[][] _InternalSelectCommand(string[] parts)
         {
             // Token list
@@ -340,8 +387,8 @@ namespace MikeDev.DB
             throw new NotImplementedException();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private void _InternalFieldNameValidator(string[] fieldNames)
+#pragma warning restore IDE1006 // Naming Styles
         {
             foreach (var item in fieldNames)
             {
