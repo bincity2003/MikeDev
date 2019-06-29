@@ -11,7 +11,7 @@ namespace MikeDev.DB
     /// <summary>
     /// DbKeeper class is used for database management.
     /// </summary>
-    public class DbTable: ICloneable, IEnumerable<string[]>, IDisposable, ICollection
+    public class DbTable : ICloneable, IEnumerable<string[]>, IDisposable, ICollection
     {
         #region Internal holder
 
@@ -79,7 +79,7 @@ namespace MikeDev.DB
             {
                 throw new DbTableException("First element must be 'Names'!");
             }
-     
+
             _InternalFieldNameValidator(fieldNames);
             FieldNames = fieldNames;
 
@@ -87,7 +87,7 @@ namespace MikeDev.DB
             _EntryNames = new Dictionary<string, int>();
         }
 
-        
+
 
         /// <summary>
         /// Read existing DbKeeper instance from file.
@@ -97,7 +97,7 @@ namespace MikeDev.DB
         {
             // Retrieve data
             string Data = File.ReadAllText(fileName);
-            
+
             // Load instance from data
             try
             {
@@ -222,7 +222,6 @@ namespace MikeDev.DB
             _InternalFieldNameValidator(holder.FieldNames);
             FieldNames = holder.FieldNames;
             _DataTable = holder._DataTable;
-
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
