@@ -6,8 +6,10 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalLoadInstance(System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalAddEntry(System.String,System.String[])")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalRemoveEntry(System.String)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalReplaceEntry(System.String,System.String[],System.Int32@)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalReplaceEntry(System.String,System.String[],System.String@)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalExecutionEngine(System.String)~System.String[][]")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalDeleteCommand(System.String[])~System.String[][]")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalSelectCommand(System.String[])~System.String[][]")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalFieldNameValidator(System.String[])")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MikeDev.DB.DbTable._InternalGetIndex(System.String)~System.String")]
+

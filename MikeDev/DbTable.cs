@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MikeDev.DB
@@ -15,8 +16,15 @@ namespace MikeDev.DB
     {
         #region Internal holder
 
-        private Dictionary<string, int> _EntryNames;                                        // Internal storage for entries' name
-        private Dictionary<int, string[]> _DataTable;     // Primary storage for entries
+        /// <summary>
+        /// Store entries' name and corresponding index.
+        /// </summary>
+        private Dictionary<string, string> _EntryNames;
+
+        /// <summary>
+        /// Store entries' data. Access by using corresponding index.
+        /// </summary>
+        private Dictionary<string, string[]> _DataTable;     
 
         #endregion
 
@@ -48,7 +56,7 @@ namespace MikeDev.DB
             {
                 try
                 {
-                    int Index = _EntryNames[name];
+                    string Index = _EntryNames[name];
                     string[] Result = new string[Count + 1];
                     Result[0] = name;
                     Array.Copy(_DataTable[Index], 0, Result, 1, Count);
@@ -83,8 +91,8 @@ namespace MikeDev.DB
             _InternalFieldNameValidator(fieldNames);
             FieldNames = fieldNames;
 
-            _DataTable = new Dictionary<int, string[]>();
-            _EntryNames = new Dictionary<string, int>();
+            _DataTable = new Dictionary<string, string[]>();
+            _EntryNames = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -183,15 +191,15 @@ namespace MikeDev.DB
         /// <param name="values">The new set of fields' value.</param>
         public void ReplaceEntry(string name, params string[] values)
         {
-            _InternalReplaceEntry(name, values, out int Index);
+            _InternalReplaceEntry(name, values, out string Index);
             _DataTable[Index] = values;
         }
 
         /// <summary>
         /// Replace multiple existing entry.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="values"></param>
+        /// <param name="name">The name of the entries to be replaced.</param>
+        /// <param name="values">The new set of fields' value.</param>
         public void ReplaceEntry(string[] name, params string[][] values)
         {
             if (name.Length != values.Length)
@@ -222,6 +230,9 @@ namespace MikeDev.DB
 
         #region Internal methods
 
+        /// <summary>
+        /// Internal method for contructor's LoadInstance.
+        /// </summary>
         private void _InternalLoadInstance(string jsonData)
         {
             // Deserialize object
@@ -234,21 +245,29 @@ namespace MikeDev.DB
             _DataTable = holder._DataTable;
         }
 
+        /// <summary>
+        /// Internal method for AddEntry.
+        /// </summary>
         private void _InternalAddEntry(string name, string[] values)
         {
+            // Calculate unique index
+            string Index = _InternalGetIndex(name);
             // Add to index
-            _EntryNames.Add(name, _EntryNames.Count);
+            _EntryNames.Add(name, Index);
 
             // Add entry to table
-            _DataTable.Add(_EntryNames.Count - 1, values);
+            _DataTable.Add(Index, values);
         }
 
+        /// <summary>
+        /// Internal method for RemoveEntry.
+        /// </summary>
         private void _InternalRemoveEntry(string name)
-#pragma warning restore IDE1006 // Naming Styles
         {
+            // Self-explanatory
             try
             {
-                int Index = _EntryNames[name];
+                string Index = _EntryNames[name];
                 _EntryNames.Remove(name);
                 _DataTable.Remove(Index);
             }
@@ -258,8 +277,12 @@ namespace MikeDev.DB
             }
         }
 
-        private void _InternalReplaceEntry(string name, string[] values, out int Index)
+        /// <summary>
+        /// Internal method for ReplaceEntry.
+        /// </summary>
+        private void _InternalReplaceEntry(string name, string[] values, out string Index)
         {
+            // Self-explanatory
             try
             {
                 Index = _EntryNames[name];
@@ -274,12 +297,16 @@ namespace MikeDev.DB
             }
         }
 
+        /// <summary>
+        /// Internal method for Execute.
+        /// </summary>
         private string[][] _InternalExecutionEngine(string command)
         {
             // Prepare
             string[][] result;
             string[] Partition = command.Split(' ');
 
+            // Determine command
             switch (Partition[0])                                       // Command identifier
             {
                 case var p when new Regex(@"[Ss][Ee][Ll][Ee][Cc][Tt]").IsMatch(p):
@@ -295,6 +322,9 @@ namespace MikeDev.DB
             return result;
         }
 
+        /// <summary>
+        /// Internal method for _InternalExecutionEngine (DELETE branch).
+        /// </summary>
         private string[][] _InternalDeleteCommand(string[] parts)
         {
             // Token list
@@ -343,6 +373,9 @@ namespace MikeDev.DB
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Internal method for _InternalExecutionEngine (SELECT branch).
+        /// </summary>
         private string[][] _InternalSelectCommand(string[] parts)
         {
             // Token list
@@ -387,8 +420,10 @@ namespace MikeDev.DB
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Internal method for _FieldName validator.
+        /// </summary>
         private void _InternalFieldNameValidator(string[] fieldNames)
-#pragma warning restore IDE1006 // Naming Styles
         {
             foreach (var item in fieldNames)
             {
@@ -397,6 +432,32 @@ namespace MikeDev.DB
                     throw new DbTableException($"Invalid field name: {item}");
                 }
             }
+        }
+
+        /// <summary>
+        /// Internal method for Index Generator.
+        /// </summary>
+        private string _InternalGetIndex(string name)
+        {
+            // Initialize hash algorithm and get bytes
+            var md5 = System.Security.Cryptography.MD5.Create();
+            byte[] Result = Encoding.ASCII.GetBytes(name);
+
+            // Compute hash
+            for (int i = 0; i < 3; i++)
+            {
+                Result = md5.ComputeHash(Result);
+            }
+
+            // Release resources
+            md5.Dispose();
+
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < Result.Length; i++)
+            {
+                s.Append(Result[i].ToString("x2"));
+            }
+            return s.ToString();
         }
 
         #endregion
