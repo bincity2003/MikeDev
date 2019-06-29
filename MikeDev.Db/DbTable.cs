@@ -43,7 +43,12 @@ namespace MikeDev.DB
         /// <summary>
         /// Get number of fields.
         /// </summary>
-        public int Count => FieldNames.Length;
+        public int GetFieldLength => FieldNames.Length;
+
+        /// <summary>
+        /// Get number of entries.
+        /// </summary>
+        public int Count => _EntryNames.Count;
 
         /// <summary>
         /// Retrieve specified entry.
@@ -123,7 +128,7 @@ namespace MikeDev.DB
         /// <param name="values">Other fields that match the fields requirements.</param>
         public void AddEntry(string name, params string[] values)
         {
-            if (values.Length != Count) // Argument assertion
+            if (values.Length != GetFieldLength) // Argument assertion
             {
                 throw new DbTableException("Number of values provided doesn't match number of field");
             }
@@ -297,7 +302,7 @@ namespace MikeDev.DB
             {
                 throw new DbTableException("Entry not found!");
             }
-            if (values.Length != Count)
+            if (values.Length != GetFieldLength)
             {
                 throw new DbTableException("Number of values provided doesn't match number of field");
             }
