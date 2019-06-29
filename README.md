@@ -15,3 +15,5 @@ And start working!
 # Contribution
 Currently, I haven't think of code contribution. I'll probably consider it in the future. 
 But feel free to propose new issues (bugs, improvements, new features).
+# License
+MikeDev repo is licensed under [MIT License](https://github.com/bincity2003/MikeDev/blob/master/LICENSE)
