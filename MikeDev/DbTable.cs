@@ -24,7 +24,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Store entries' data. Access by using corresponding index.
         /// </summary>
-        private Dictionary<string, string[]> _DataTable;     
+        private Dictionary<string, string[]> _DataTable;
 
         #endregion
 
@@ -217,13 +217,27 @@ namespace MikeDev.DB
         /// </summary>
         /// <param name="command">Command to be executed.</param>
         /// <returns>An array of String array (fields).</returns>
-        public string[][] Execute(string command)
+        public static string[][] Execute(string command)
         {
             if (command is null)
             {
                 throw new ArgumentNullException(nameof(command));
             }
             return _InternalExecutionEngine(command);
+        }
+
+        /// <summary>
+        /// API helper to calculate index.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string GetIndex(string s)
+        {
+            if (s is null)
+            {
+                throw new ArgumentNullException(nameof(s));
+            }
+            return _InternalGetIndex(s);
         }
 
         #endregion
@@ -300,7 +314,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for Execute.
         /// </summary>
-        private string[][] _InternalExecutionEngine(string command)
+        private static string[][] _InternalExecutionEngine(string command)
         {
             // Prepare
             string[][] result;
@@ -325,7 +339,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for _InternalExecutionEngine (DELETE branch).
         /// </summary>
-        private string[][] _InternalDeleteCommand(string[] parts)
+        private static string[][] _InternalDeleteCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();
@@ -376,7 +390,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for _InternalExecutionEngine (SELECT branch).
         /// </summary>
-        private string[][] _InternalSelectCommand(string[] parts)
+        private static string[][] _InternalSelectCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();
@@ -423,7 +437,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for _FieldName validator.
         /// </summary>
-        private void _InternalFieldNameValidator(string[] fieldNames)
+        private static void _InternalFieldNameValidator(string[] fieldNames)
         {
             foreach (var item in fieldNames)
             {
@@ -437,7 +451,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for Index Generator.
         /// </summary>
-        private string _InternalGetIndex(string name)
+        private static string _InternalGetIndex(string name)
         {
             // Initialize hash algorithm and get bytes
             var md5 = System.Security.Cryptography.MD5.Create();
