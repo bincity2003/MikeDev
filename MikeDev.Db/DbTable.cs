@@ -49,18 +49,14 @@ namespace MikeDev.DB
         /// Retrieve specified entry.
         /// </summary>
         /// <param name="name">The name of the entry.</param>
-        /// <returns>A String array containing values, first element is the name.</returns>
+        /// <returns>A String array containing values.</returns>
         public string[] this[string name]
         {
             get
             {
                 try
                 {
-                    string Index = _EntryNames[name];
-                    string[] Result = new string[Count + 1];
-                    Result[0] = name;
-                    Array.Copy(_DataTable[Index], 0, Result, 1, Count);
-                    return Result;
+                    return _DataTable[_EntryNames[name]];
                 }
                 catch (KeyNotFoundException)
                 {
@@ -82,10 +78,6 @@ namespace MikeDev.DB
             if (fieldNames.Length == 0) // Base assertion
             {
                 throw new ArgumentException("Rows or columns' name must not be empty!");
-            }
-            if (fieldNames[0] != "Name")
-            {
-                throw new DbTableException("First element must be 'Name'!");
             }
 
             _InternalFieldNameValidator(fieldNames);

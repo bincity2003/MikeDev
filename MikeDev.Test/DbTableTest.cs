@@ -20,6 +20,17 @@ namespace MikeDev.Test
             Assert.IsTrue(obj.FieldNames[0] == "Name");
             Assert.IsFalse(obj.FieldNames[1] != "Age");
             Assert.IsTrue(obj.Count == 2);
+
+            obj.Dispose();
+        }
+
+        public void TestB()
+        {
+            DbTable obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age"
+            });
         }
     }
 }
