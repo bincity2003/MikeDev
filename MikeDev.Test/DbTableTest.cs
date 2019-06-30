@@ -220,7 +220,7 @@ namespace MikeDev.Test
         }
 
         /// <summary>
-        /// This test requires DbTable to correctly export data.
+        /// This test requires DbTable to correctly export/import data from string.
         /// </summary>
         [Test]
         public void TestH()
@@ -245,6 +245,43 @@ namespace MikeDev.Test
             obj.Dispose();
 
             obj = new DbTable(Data, true);
+
+            Assert.IsTrue(obj.Count == 5);
+            Assert.IsTrue(obj.GetFieldLength == 3);
+            Assert.IsTrue(obj.GetEntriesNames.Length == 5);
+            Assert.IsTrue(obj.GetEntriesNames[0] == "Mike");
+            Assert.IsTrue(obj.GetEntriesNames[1] == "Nike");
+            Assert.IsTrue(obj.GetEntriesNames[4] == "Tram");
+
+            obj.Dispose();
+        }
+
+        /// <summary>
+        /// This test requires DbTable to correctly export/import data from file.
+        /// </summary>
+        [Test]
+        public void TestI()
+        {
+            var obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age",
+                "Job"
+            });
+
+            string[] Names = { "Mike", "Nike", "Jess", "Eric", "Tram" };
+            string[][] Values = { new string[] { "Mike", "15", "Student" },
+                                  new string[] { "Nike", "12", "Student" },
+                                  new string[] { "Jess", "12", "Student" },
+                                  new string[] { "Eric", "11", "Student" },
+                                  new string[] { "Tram", "12", "Teacher" }};
+            obj.AddEntry(Names, Values);
+            Assert.IsTrue(obj.Count == 5);
+
+            obj.Export("C:\\Users\\Thanh Cong\\Desktop\\test.dbtable");
+            obj.Dispose();
+
+            obj = new DbTable("C:\\Users\\Thanh Cong\\Desktop\\test.dbtable");
 
             Assert.IsTrue(obj.Count == 5);
             Assert.IsTrue(obj.GetFieldLength == 3);
