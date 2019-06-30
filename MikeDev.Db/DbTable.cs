@@ -214,7 +214,7 @@ namespace MikeDev.Db
         /// </summary>
         /// <param name="command">Command to be executed.</param>
         /// <returns>An array of String array (fields).</returns>
-        public static string[][] Execute(string command)
+        public string[][] Execute(string command)
         {
             if (command is null)
             {
@@ -311,7 +311,7 @@ namespace MikeDev.Db
         /// <summary>
         /// Internal method for Execute.
         /// </summary>
-        private static string[][] _InternalExecutionEngine(string command)
+        private string[][] _InternalExecutionEngine(string command)
         {
             // Prepare
             string[][] result;
@@ -336,7 +336,7 @@ namespace MikeDev.Db
         /// <summary>
         /// Internal method for _InternalExecutionEngine (DELETE branch).
         /// </summary>
-        private static string[][] _InternalDeleteCommand(string[] parts)
+        private string[][] _InternalDeleteCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();
@@ -387,7 +387,7 @@ namespace MikeDev.Db
         /// <summary>
         /// Internal method for _InternalExecutionEngine (SELECT branch).
         /// </summary>
-        private static string[][] _InternalSelectCommand(string[] parts)
+        private string[][] _InternalSelectCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();

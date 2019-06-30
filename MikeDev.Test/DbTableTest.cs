@@ -156,6 +156,56 @@ namespace MikeDev.Test
             obj.RemoveEntry(Names);
             Assert.IsTrue(obj.Count == 0);
             Assert.IsTrue(obj.GetFieldLength == 3);
+
+            obj.Dispose();
+        }
+
+        /// <summary>
+        /// This test requires DbTable to correctly remove an entry/ multiple entries.
+        /// </summary>
+        [Test]
+        public void TestF()
+        {
+            var obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age",
+                "Job"
+            });
+
+            // Add multiple entries at the same time
+            string[] Names = { "Mike", "Nike", "Jess", "Eric", "Tram" };
+            string[][] Values = { new string[] { "Mike", "15", "Student" },
+                                  new string[] { "Nike", "12", "Student" },
+                                  new string[] { "Jess", "12", "Student" },
+                                  new string[] { "Eric", "11", "Student" },
+                                  new string[] { "Tram", "12", "Teacher" }};
+            obj.AddEntry(Names, Values);
+
+            Assert.IsTrue(obj["Mike"][1] == "15");
+            Assert.IsTrue(obj["Nike"][1] == "12");
+            Assert.IsTrue(obj["Nike"][2] == "Student");
+
+            // Replace single entry
+            string[] Single = { "Mike", "30", "Lawyers" };
+            obj.ReplaceEntry("Mike", Single);
+
+            Assert.IsTrue(obj["Mike"][1] == "30");
+            Assert.IsTrue(obj["Mike"][2] == "Lawyers");
+
+            // Replace multiple entries
+            string[][] NewValues = { new string[] { "Mike", "10", "Student" },
+                                     new string[] { "Nike", "25", "Hackers" },
+                                     new string[] { "Jess", "11", "Student" },
+                                     new string[] { "Eric", "09", "Student" },
+                                     new string[] { "Tram", "10", "Teacher" }};
+            obj.ReplaceEntry(Names, NewValues);
+
+            Assert.IsTrue(obj["Mike"][1] == "10");
+            Assert.IsTrue(obj["Nike"][1] == "25");
+            Assert.IsTrue(obj["Nike"][2] == "Hackers");
+
+            obj.Dispose();
         }
     }
 }
