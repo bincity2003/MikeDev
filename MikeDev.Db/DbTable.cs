@@ -104,11 +104,29 @@ namespace MikeDev.Db
             // Load instance from data
             try
             {
-                _InternalLoadInstance(Data);
+                _InternalJsonImport(Data);
             }
             catch // If data is faulty, then throw
             {
                 throw new Exception("Unable to deserialize JSON data! Data is broken");
+            }
+        }
+
+        /// <summary>
+        /// Convert JSON string to instance.
+        /// </summary>
+        /// <param name="data">Data string</param>
+        /// <param name="isData">*SIGNATURE* Leave default. Won't work if set to false.</param>
+        public DbTable(string data, bool isData = true)
+        {
+            if (isData)
+            {
+                _InternalJsonImport(data);
+            }
+            else
+            {
+                Dispose();
+                throw new DbTableException("Bad argument! Leave it default (true)!");
             }
         }
 
@@ -224,15 +242,6 @@ namespace MikeDev.Db
         }
 
         /// <summary>
-        /// Export this DbTable to a JSON string.
-        /// </summary>
-        /// <returns>A JSON string representing this instance.</returns>
-        public string Export()
-        {
-            return _InternalJsonExport();
-        }
-
-        /// <summary>
         /// Write this DbTable instance to a file (in JSON format).
         /// </summary>
         /// <param name="filename">The path to the file.</param>
@@ -240,6 +249,11 @@ namespace MikeDev.Db
         {
             string Data = _InternalJsonExport();
             File.WriteAllText(filename, Data);
+        }
+
+        public string Export()
+        {
+            return _InternalJsonExport();
         }
 
         /// <summary>
@@ -263,16 +277,13 @@ namespace MikeDev.Db
         /// <summary>
         /// Internal method for contructor's LoadInstance.
         /// </summary>
-        private void _InternalLoadInstance(string jsonData)
+        private void _InternalJsonImport(string jsonData)
         {
-            // Deserialize object
-            DbTable holder = JsonConvert.DeserializeObject<DbTable>(jsonData);
+            string[] Data = JsonConvert.DeserializeObject<string[]>(jsonData);
 
-            // Copying data (need to be added more in the future)
-            _EntryNames = holder._EntryNames;
-            _InternalFieldNameValidator(holder.FieldNames);
-            FieldNames = holder.FieldNames;
-            _DataTable = holder._DataTable;
+            _EntryNames = JsonConvert.DeserializeObject<Dictionary<string, string>>(Data[0]);
+            _DataTable = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(Data[1]);
+            FieldNames = JsonConvert.DeserializeObject<string[]>(Data[2]);
         }
 
         /// <summary>
@@ -281,7 +292,14 @@ namespace MikeDev.Db
         /// <returns>A JSON string of this instance.</returns>
         private string _InternalJsonExport()
         {
-            return JsonConvert.SerializeObject(this);
+            string[] Data =
+            {
+                JsonConvert.SerializeObject(_EntryNames),
+                JsonConvert.SerializeObject(_DataTable),
+                JsonConvert.SerializeObject(FieldNames),
+            };
+
+            return JsonConvert.SerializeObject(Data);
         }
 
         /// <summary>
