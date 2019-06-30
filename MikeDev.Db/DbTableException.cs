@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MikeDev.DB
+namespace MikeDev.Db
 {
     [Serializable]
     public class DbTableException : Exception
