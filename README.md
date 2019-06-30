@@ -1,4 +1,4 @@
-# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=metadata_patch)](https://travis-ci.org/bincity2003/MikeDev)
+# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev)
 This is the place where I will stored all general-purpose project in the future.
 ## Description
 Here, I'll publish all my (in free time) projects. Currently, it has:
