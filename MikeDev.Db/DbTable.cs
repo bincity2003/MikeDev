@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MikeDev.DB
+namespace MikeDev.Db
 {
     /// <summary>
     /// DbKeeper class is used for database management.
