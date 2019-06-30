@@ -1,6 +1,5 @@
 ﻿using MikeDev.Db;
 using NUnit.Framework;
-using Newtonsoft.Json;
 
 namespace MikeDev.Test
 {
