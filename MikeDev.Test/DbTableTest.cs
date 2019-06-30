@@ -99,5 +99,30 @@ namespace MikeDev.Test
 
             obj.Dispose();
         }
+
+        /// <summary>
+        /// This test requires DbTable to correcly remove a single entry.
+        /// </summary>
+        [Test]
+        public void TestD()
+        {
+            DbTable obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age"
+            });
+
+            // Add a single entry
+            obj.AddEntry("Mike", new string[] { "Mike", "15" });
+            Assert.IsTrue(obj.Count == 1);
+            Assert.IsTrue(obj.GetFieldLength == 2);
+            Assert.IsTrue(obj["Mike"][0] == "Mike");
+            Assert.IsTrue(obj["Mike"][1] == "15");
+
+            // Remove that entry
+            obj.RemoveEntry("Mike");
+            Assert.IsTrue(obj.Count == 0);
+            Assert.IsTrue(obj.GetFieldLength == 2);
+        }
     }
 }
