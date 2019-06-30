@@ -224,6 +224,25 @@ namespace MikeDev.Db
         }
 
         /// <summary>
+        /// Export this DbTable to a JSON string.
+        /// </summary>
+        /// <returns>A JSON string representing this instance.</returns>
+        public string Export()
+        {
+            return _InternalJsonExport();
+        }
+
+        /// <summary>
+        /// Write this DbTable instance to a file (in JSON format).
+        /// </summary>
+        /// <param name="filename">The path to the file.</param>
+        public void Export(string filename)
+        {
+            string Data = _InternalJsonExport();
+            File.WriteAllText(filename, Data);
+        }
+
+        /// <summary>
         /// API helper to calculate index.
         /// </summary>
         /// <param name="s"></param>
@@ -254,6 +273,15 @@ namespace MikeDev.Db
             _InternalFieldNameValidator(holder.FieldNames);
             FieldNames = holder.FieldNames;
             _DataTable = holder._DataTable;
+        }
+
+        /// <summary>
+        /// Internal method for Export.
+        /// </summary>
+        /// <returns>A JSON string of this instance.</returns>
+        private string _InternalJsonExport()
+        {
+            return JsonConvert.SerializeObject(this);
         }
 
         /// <summary>
