@@ -126,5 +126,36 @@ namespace MikeDev.Test
 
             obj.Dispose();
         }
+
+        /// <summary>
+        /// This test requires DbTable to correctly remove multiple entries.
+        /// </summary>
+        [Test]
+        public void TestE()
+        {
+            var obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age",
+                "Job"
+            });
+
+            // Add multiple entries at the same time
+            string[] Names = { "Mike", "Nike", "Jess", "Eric", "Tram" };
+            string[][] Values = { new string[] { "Mike", "15", "Student" },
+                                  new string[] { "Nike", "12", "Student" },
+                                  new string[] { "Jess", "12", "Student" },
+                                  new string[] { "Eric", "11", "Student" },
+                                  new string[] { "Tram", "12", "Teacher" }};
+            obj.AddEntry(Names, Values);
+
+            Assert.IsTrue(obj.Count == 5);
+            Assert.IsTrue(obj.GetFieldLength == 3);
+
+            // Remove multiple entries
+            obj.RemoveEntry(Names);
+            Assert.IsTrue(obj.Count == 0);
+            Assert.IsTrue(obj.GetFieldLength == 3);
+        }
     }
 }
