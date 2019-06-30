@@ -452,13 +452,10 @@ namespace MikeDev.Db
         {
             // Initialize hash algorithm and get bytes
             var md5 = System.Security.Cryptography.MD5.Create();
-            byte[] Result = Encoding.ASCII.GetBytes(name);
+            byte[] Result = Encoding.UTF8.GetBytes(name);
 
             // Compute hash
-            for (int i = 0; i < 3; i++)
-            {
-                Result = md5.ComputeHash(Result);
-            }
+            Result = md5.ComputeHash(Result);
 
             // Release resources
             md5.Dispose();

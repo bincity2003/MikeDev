@@ -207,5 +207,16 @@ namespace MikeDev.Test
 
             obj.Dispose();
         }
+
+        /// <summary>
+        /// This test requires DbTable to correctly generate index with standard.
+        /// </summary>
+        [Test]
+        public void TestG()
+        {
+            string n = "test";
+
+            Assert.IsTrue(DbTable.GetIndex(n) == "098f6bcd4621d373cade4e832627b4f6");
+        }
     }
 }
