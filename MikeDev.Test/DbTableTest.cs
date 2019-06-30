@@ -123,6 +123,8 @@ namespace MikeDev.Test
             obj.RemoveEntry("Mike");
             Assert.IsTrue(obj.Count == 0);
             Assert.IsTrue(obj.GetFieldLength == 2);
+
+            obj.Dispose();
         }
     }
 }
