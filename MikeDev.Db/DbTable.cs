@@ -117,7 +117,7 @@ namespace MikeDev.Db
         /// </summary>
         /// <param name="data">Data string</param>
         /// <param name="isData">*SIGNATURE* Leave default. Won't work if set to false.</param>
-        public DbTable(string data, bool isData = true)
+        public DbTable(string data, bool isData)
         {
             if (isData)
             {
