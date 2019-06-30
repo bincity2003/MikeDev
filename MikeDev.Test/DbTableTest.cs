@@ -245,7 +245,7 @@ namespace MikeDev.Test
             string Data = obj.Export();
             obj.Dispose();
 
-            obj = JsonConvert.DeserializeObject<DbTable>(Data);
+            obj = new DbTable(Data, true);
 
             Assert.IsTrue(obj.Count == 5);
             Assert.IsTrue(obj.GetFieldLength == 3);
