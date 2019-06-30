@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MikeDev.DB
+namespace MikeDev.Db
 {
     /// <summary>
     /// DbKeeper class is used for database management.
@@ -36,31 +36,32 @@ namespace MikeDev.DB
         public string[] GetEntriesNames => _EntryNames.Keys.ToArray();
 
         /// <summary>
-        /// Get an array containing columns' name.
+        /// Get an array containing fields.
         /// </summary>
         public string[] FieldNames { get; private set; }
 
         /// <summary>
         /// Get number of fields.
         /// </summary>
-        public int Count => FieldNames.Length;
+        public int GetFieldLength => FieldNames.Length;
+
+        /// <summary>
+        /// Get number of entries.
+        /// </summary>
+        public int Count => _EntryNames.Count;
 
         /// <summary>
         /// Retrieve specified entry.
         /// </summary>
         /// <param name="name">The name of the entry.</param>
-        /// <returns>A String array containing values, first element is the name.</returns>
+        /// <returns>A String array containing values.</returns>
         public string[] this[string name]
         {
             get
             {
                 try
                 {
-                    string Index = _EntryNames[name];
-                    string[] Result = new string[Count + 1];
-                    Result[0] = name;
-                    Array.Copy(_DataTable[Index], 0, Result, 1, Count);
-                    return Result;
+                    return _DataTable[_EntryNames[name]];
                 }
                 catch (KeyNotFoundException)
                 {
@@ -82,10 +83,6 @@ namespace MikeDev.DB
             if (fieldNames.Length == 0) // Base assertion
             {
                 throw new ArgumentException("Rows or columns' name must not be empty!");
-            }
-            if (fieldNames[0] != "Names")
-            {
-                throw new DbTableException("First element must be 'Names'!");
             }
 
             _InternalFieldNameValidator(fieldNames);
@@ -131,7 +128,7 @@ namespace MikeDev.DB
         /// <param name="values">Other fields that match the fields requirements.</param>
         public void AddEntry(string name, params string[] values)
         {
-            if (values.Length != Count) // Argument assertion
+            if (values.Length != GetFieldLength) // Argument assertion
             {
                 throw new DbTableException("Number of values provided doesn't match number of field");
             }
@@ -217,7 +214,7 @@ namespace MikeDev.DB
         /// </summary>
         /// <param name="command">Command to be executed.</param>
         /// <returns>An array of String array (fields).</returns>
-        public static string[][] Execute(string command)
+        public string[][] Execute(string command)
         {
             if (command is null)
             {
@@ -305,7 +302,7 @@ namespace MikeDev.DB
             {
                 throw new DbTableException("Entry not found!");
             }
-            if (values.Length != Count)
+            if (values.Length != GetFieldLength)
             {
                 throw new DbTableException("Number of values provided doesn't match number of field");
             }
@@ -314,7 +311,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for Execute.
         /// </summary>
-        private static string[][] _InternalExecutionEngine(string command)
+        private string[][] _InternalExecutionEngine(string command)
         {
             // Prepare
             string[][] result;
@@ -339,7 +336,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for _InternalExecutionEngine (DELETE branch).
         /// </summary>
-        private static string[][] _InternalDeleteCommand(string[] parts)
+        private string[][] _InternalDeleteCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();
@@ -390,7 +387,7 @@ namespace MikeDev.DB
         /// <summary>
         /// Internal method for _InternalExecutionEngine (SELECT branch).
         /// </summary>
-        private static string[][] _InternalSelectCommand(string[] parts)
+        private string[][] _InternalSelectCommand(string[] parts)
         {
             // Token list
             List<string> Tokens = new List<string>();
@@ -455,13 +452,10 @@ namespace MikeDev.DB
         {
             // Initialize hash algorithm and get bytes
             var md5 = System.Security.Cryptography.MD5.Create();
-            byte[] Result = Encoding.ASCII.GetBytes(name);
+            byte[] Result = Encoding.UTF8.GetBytes(name);
 
             // Compute hash
-            for (int i = 0; i < 3; i++)
-            {
-                Result = md5.ComputeHash(Result);
-            }
+            Result = md5.ComputeHash(Result);
 
             // Release resources
             md5.Dispose();

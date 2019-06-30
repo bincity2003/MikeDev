@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>MikeDev.Db</PackageId>
+    <Version>0.5.0</Version>
+    <Company>MikeDev</Company>
+    <Authors>M1keD3v</Authors>
+    <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
+    <Copyright>MIT License</Copyright>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>
