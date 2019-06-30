@@ -1,4 +1,4 @@
-# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?style=plastic)
+# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?color=red&label=License&logo=MIT&logoColor=blue&style=plastic)
 This is the place where I will stored all general-purpose project in the future.
 ## Description
 Here, I'll publish all my (in free time) projects. Currently, it has:
