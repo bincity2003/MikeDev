@@ -1,5 +1,6 @@
 ﻿using MikeDev.Db;
 using NUnit.Framework;
+using Newtonsoft.Json;
 
 namespace MikeDev.Test
 {
@@ -217,6 +218,43 @@ namespace MikeDev.Test
             string n = "test";
 
             Assert.IsTrue(DbTable.GetIndex(n) == "098f6bcd4621d373cade4e832627b4f6");
+        }
+
+        /// <summary>
+        /// This test requires DbTable to correctly export data.
+        /// </summary>
+        [Test]
+        public void TestH()
+        {
+            var obj = new DbTable(new string[]
+            {
+                "Name",
+                "Age",
+                "Job"
+            });
+
+            string[] Names = { "Mike", "Nike", "Jess", "Eric", "Tram" };
+            string[][] Values = { new string[] { "Mike", "15", "Student" },
+                                  new string[] { "Nike", "12", "Student" },
+                                  new string[] { "Jess", "12", "Student" },
+                                  new string[] { "Eric", "11", "Student" },
+                                  new string[] { "Tram", "12", "Teacher" }};
+            obj.AddEntry(Names, Values);
+            Assert.IsTrue(obj.Count == 5);
+
+            string Data = obj.Export();
+            obj.Dispose();
+
+            obj = JsonConvert.DeserializeObject<DbTable>(Data);
+
+            Assert.IsTrue(obj.Count == 5);
+            Assert.IsTrue(obj.GetFieldLength == 3);
+            Assert.IsTrue(obj.GetEntriesNames.Length == 5);
+            Assert.IsTrue(obj.GetEntriesNames[0] == "Mike");
+            Assert.IsTrue(obj.GetEntriesNames[1] == "Nike");
+            Assert.IsTrue(obj.GetEntriesNames[4] == "Tram");
+
+            obj.Dispose();
         }
     }
 }
