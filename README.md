@@ -1,4 +1,4 @@
-# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?color=red&label=License&logo=MIT&logoColor=blue&style=plastic) ![GitHub release](https://img.shields.io/github/release/bincity2003/MikeDev.svg?logoColor=orange)
+# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?color=red&label=License&logo=MIT&style=plastic) ![GitHub release](https://img.shields.io/github/release/bincity2003/MikeDev.svg?logoColor=orange)
 This is the place where I will stored all general-purpose project in the future.
 ## Description
 Here, I'll publish all my (in free time) projects. Currently, it has:
@@ -9,13 +9,24 @@ Here, I'll publish all my (in free time) projects. Currently, it has:
 * Your favorite text editor
 * NUnit 3.0 or higher
 ## Installation
+### Git
 All you have to do is to clone this repository and build it:
 ```bash
 $ git clone https://github.com/bincity2003/MikeDev.git
 $ cd MikeDev
 $ dotnet build
 ```
+### NuGet package manager
+You can use NuGet package manager to install the latest release.
+```powershell
+PM> Install-Package MikeDev.Db
+```
 And start working!
+## Known issues
+### DbTable
+On current virtual machine, DbTable is unable to serialize over 10000 entries correctly. In the latest release, sometimes fields are missing, sometimes entries are broken. Further investigations conclude that it's dependency error (Newtonsoft.JSON)
+### MLogger
+No known issue is found recently.
 ## Contribution
 Currently, I haven't think of code contribution. I'll probably consider it in the future. 
 But feel free to propose new issues (bugs, improvements, new features).
