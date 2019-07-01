@@ -19,9 +19,15 @@ $ dotnet build
 ### NuGet package manager
 You can use NuGet package manager to install the latest release.
 ```powershell
-PM> Install-Package MikeDev.Db
+PM> Install-Package <package_name>
 ```
-And start working!
+Available package names are:
+```
+MikeDev.Db          (for DbTable)
+MikeDev.Debug       (for MLogger)
+MikeDev.Test        (tests for other packages)
+```
+**After installation, just start working!**
 ## Known issues
 ### DbTable
 On current virtual machine, DbTable is unable to serialize over 10000 entries correctly. In the latest release, sometimes fields are missing, sometimes entries are broken. Further investigations conclude that it's dependency error (Newtonsoft.JSON)
