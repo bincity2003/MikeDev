@@ -9,7 +9,28 @@ namespace MikeDev.Debug
     /// </summary>
     public class MLogger
     {
-        private bool _DefaultCulture;
+        private bool _DefaultCulture = true;
+
+        public string CapturedFilename { get; private set; }
+
+        /// <summary>
+        /// Capture a file and write future log to it.
+        /// </summary>
+        /// <param name="filename">Path to captured file.</param>
+        public MLogger(string filename)
+        {
+            CapturedFilename = filename;
+        }
+
+        /// <summary>
+        /// Capture a file and write future log (using custom culture) to it.
+        /// </summary>
+        /// <param name="filename">Path to captured file.</param>
+        /// <param name="customCulture">The custom template for log.</param>
+        public MLogger(string filename, string customCulture)
+        {
+
+        }
 
         /// <summary>
         /// Write message to captured file.
