@@ -2,7 +2,8 @@
 This is the place where I will stored all general-purpose project in the future.
 ## Description
 Here, I'll publish all my (in free time) projects. Currently, it has:
-* [DbTable](https://github.com/bincity2003/MikeDev/tree/master/MikeDev/MikeDev.Db) (A simple NoSQL database)
+* [DbTable](https://github.com/bincity2003/MikeDev/tree/dbtable-development/MikeDev.Db) (A simple NoSQL database)
+* [MLogger](https://github.com/bincity2003/MikeDev/tree/mlogger-development/MikeDev.Debug) (A simple debugging tool)
 ## Prerequisites
 * .NET Core 3.0 SDK (currently SDK 3.0.100-preview6-012264)
 * Your favorite text editor
