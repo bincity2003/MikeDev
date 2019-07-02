@@ -30,7 +30,8 @@ MikeDev.Test        (tests for other packages)
 **After installation, just start working!**
 ## Known issues
 ### DbTable
-On current virtual machine, DbTable is unable to serialize over 10000 entries correctly. In the latest release, sometimes fields are missing, sometimes entries are broken. Further investigations conclude that it's dependency error (Newtonsoft.JSON)
+On current virtual machine, DbTable is unable to serialize over 10000 entries correctly. In the latest release, sometimes fields are missing, sometimes entries are broken. Further investigations conclude that it's dependency error (Newtonsoft.JSON).
+For more infomation, please refer to [Issue #24](https://github.com/bincity2003/MikeDev/issues/24).
 ### MLogger
 No known issue is found recently.
 ## Contribution
