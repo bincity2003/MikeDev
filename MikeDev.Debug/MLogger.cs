@@ -57,7 +57,7 @@ namespace MikeDev.Debug
             Info,
             Warning,
             Error
-        }
+        };
 
         /// <summary>
         /// Create message based on template.
