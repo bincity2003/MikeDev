@@ -8,20 +8,25 @@ namespace MikeDev.Debug
     /// MLogger class is used for debugging and logging procedures.
     /// </summary>
     public class MLogger
-    {        
-        public string CapturedFilename { get; private set; }
+    {   
+        private string _filename;
+        public string CapturedFilename 
+        {
+            get => _filename;
+            set
+            {
+                if (value is null) throw new ArgumentException("Filename can't be null!");
+                if (!System.IO.File.Exists(value)) throw new ArgumentException("File not found!");
+                _filename = value;
+            }
+        }
 
         /// <summary>
         /// Capture a file and write future log to it.
         /// </summary>
         /// <param name="filename">Path to captured file.</param>
         public MLogger(string filename)
-        {
-            if (filename is null)
-            {
-                throw new ArgumentException("Arg can't be null");
-            }
-            
+        {                      
             CapturedFilename = filename;
         }
 
