@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>MikeDev.Debug</PackageId>
+    <Version>0.1.0</Version>
+    <Company>MikeDev</Company>
+    <Authors>M1keD3v</Authors>
+    <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
+    <Copyright>MIT License</Copyright>
   </PropertyGroup>
 
 </Project>
