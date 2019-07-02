@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,10 +8,7 @@ namespace MikeDev.Debug
     /// MLogger class is used for debugging and logging procedures.
     /// </summary>
     public class MLogger
-    {
-        private bool _DefaultCulture = true;
-        private string _CustomCulture = null;
-
+    {        
         public string CapturedFilename { get; private set; }
 
         /// <summary>
