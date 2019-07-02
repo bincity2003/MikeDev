@@ -10,6 +10,7 @@ namespace MikeDev.Debug
     public class MLogger
     {
         private bool _DefaultCulture = true;
+        private string _CustomCulture = null;
 
         public string CapturedFilename { get; private set; }
 
@@ -29,7 +30,8 @@ namespace MikeDev.Debug
         /// <param name="customCulture">The custom template for log.</param>
         public MLogger(string filename, string customCulture)
         {
-
+            CapturedFilename = filename;
+            _CustomCulture = customCulture;
         }
 
         /// <summary>
@@ -41,8 +43,16 @@ namespace MikeDev.Debug
         /// <returns>True if log is written successfully. Otherwise, false.</returns>
         public bool Log(string message, bool includeTime = true, LogLevel level = LogLevel.Info)
         {
-            string Data = _InternalPrepareMessage(message, includeTime, level);
-            throw new NotImplementedException();
+            try
+            {
+                string Data = _InternalPrepareMessage(message, includeTime, level);
+                System.IO.File.WriteAllText(CapturedFilename, Data);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -56,7 +66,7 @@ namespace MikeDev.Debug
         }
 
         /// <summary>
-        /// Create message based on default template.
+        /// Create message based on template.
         /// </summary>
         private string _InternalPrepareMessage(string message, bool includeTime, LogLevel level)
         {
@@ -69,12 +79,14 @@ namespace MikeDev.Debug
                 Message += $"{level.ToString()} : ";
 
                 // Add message
-                Message += message;
+                Message += message + "\n";
 
                 return Message;
             }
-
-            throw new NotImplementedException();
+            else
+            {
+                throw new NotImplementedException();
+            }           
         }
     }
 }
