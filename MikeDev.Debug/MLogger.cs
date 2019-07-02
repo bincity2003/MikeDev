@@ -20,6 +20,11 @@ namespace MikeDev.Debug
         /// <param name="filename">Path to captured file.</param>
         public MLogger(string filename)
         {
+            if (filename is null)
+            {
+                throw new ArgumentException("Arg can't be null");
+            }
+            
             CapturedFilename = filename;
         }
 
@@ -30,6 +35,11 @@ namespace MikeDev.Debug
         /// <param name="customCulture">The custom template for log.</param>
         public MLogger(string filename, string customCulture)
         {
+            if (customCulture is null || filename is null)
+            {
+                throw new ArgumentException("Args can't be null!")
+            }
+            
             CapturedFilename = filename;
             _CustomCulture = customCulture;
         }
@@ -70,23 +80,16 @@ namespace MikeDev.Debug
         /// </summary>
         private string _InternalPrepareMessage(string message, bool includeTime, LogLevel level)
         {
-            if (_DefaultCulture)
-            {
-                // Add timestamp
-                string Message = includeTime ? $"[{DateTime.Now}]" : "";
+            // Add timestamp
+            string Message = includeTime ? $"[{DateTime.Now}]" : "";
 
-                // Add severity
-                Message += $"{level.ToString()} : ";
+            // Add severity
+            Message += $"{level.ToString()} : ";
 
-                // Add message
-                Message += message + "\n";
+            // Add message
+            Message += message + "\n";
 
-                return Message;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }           
+            return Message;                          
         }
     }
 }
