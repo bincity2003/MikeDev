@@ -29,22 +29,6 @@ namespace MikeDev.Debug
         }
 
         /// <summary>
-        /// Capture a file and write future log (using custom culture) to it.
-        /// </summary>
-        /// <param name="filename">Path to captured file.</param>
-        /// <param name="customCulture">The custom template for log.</param>
-        public MLogger(string filename, string customCulture)
-        {
-            if (customCulture is null || filename is null)
-            {
-                throw new ArgumentException("Args can't be null!")
-            }
-            
-            CapturedFilename = filename;
-            _CustomCulture = customCulture;
-        }
-
-        /// <summary>
         /// Write message to captured file.
         /// </summary>
         /// <param name="level">The level of severity.</param>
