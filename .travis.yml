@@ -10,6 +10,7 @@ mono: none
 install:
     - sudo snap alias dotnet-sdk.dotnet dotnet
     - dotnet restore
+    - touch log.txt
 script:
     - dotnet build
     - dotnet test
