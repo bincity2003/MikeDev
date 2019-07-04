@@ -72,7 +72,7 @@ namespace MikeDev.Debug
         private string _InternalPrepareMessage(string message, bool includeTime, LogLevel level)
         {
             // Add timestamp
-            string Message = includeTime ? $"[{DateTime.Now}]" : "";
+            string Message = includeTime ? $"[{DateTime.Now}] " : "";
 
             // Add severity
             Message += $"{level.ToString()} : ";
