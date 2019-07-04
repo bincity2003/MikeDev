@@ -25,7 +25,6 @@ Available package names are:
 ```
 MikeDev.Db          (for DbTable)
 MikeDev.Debug       (for MLogger)
-MikeDev.Test        (tests for other packages)
 ```
 **After installation, just start working!**
 ## Known issues
