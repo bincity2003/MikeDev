@@ -42,7 +42,7 @@ namespace MikeDev.Debug
             try
             {
                 string Data = _InternalPrepareMessage(message, includeTime, level);
-                System.IO.File.WriteAllText(CapturedFilename, Data);
+                System.IO.File.AppendAllText(CapturedFilename, Data);
                 return true;
             }
             catch
