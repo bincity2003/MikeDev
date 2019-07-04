@@ -22,9 +22,11 @@ namespace MikeDev.Test
             Assert.AreEqual(Result, "Warning : This is a test message!\n");
         }
 
+        [Test]
         public void TestB()
         {
-            MLogger obj = new MLogger("C:\\Users\\Thanh Cong\\Desktop\\log.txt");
+            System.IO.File.Create("log.txt");
+            MLogger obj = new MLogger("log.txt");
             string Message = "This is a test message!";
 
             bool Flag = obj.Log(Message);
