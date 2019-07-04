@@ -12,7 +12,10 @@ namespace MikeDev.Test
         [Test]
         public void TestA()
         {
-
+            MLogger obj = new MLogger("C:\\Users\\Thanh Cong\\Desktop\\log.txt");
+            string Message = "This is a test message!";
+            string Result = obj.ProcessMessage(Message, false);
+            Assert.AreEqual(Result, "Info : This is a test message!\n");
         }
     }
 }
