@@ -12,7 +12,7 @@ namespace MikeDev.Test
         [Test]
         public void TestA()
         {
-            MLogger obj = new MLogger("C:\\Users\\Thanh Cong\\Desktop\\log.txt");
+            MLogger obj = new MLogger("log.txt");
             string Message = "This is a test message!";
 
             string Result = obj.ProcessMessage(Message, false);
@@ -25,7 +25,6 @@ namespace MikeDev.Test
         [Test]
         public void TestB()
         {
-            System.IO.File.Create("log.txt");
             MLogger obj = new MLogger("log.txt");
             string Message = "This is a test message!";
 
