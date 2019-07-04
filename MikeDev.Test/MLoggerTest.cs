@@ -12,6 +12,7 @@ namespace MikeDev.Test
         [Test]
         public void TestA()
         {
+            System.IO.File.Create("log.txt").Close();
             MLogger obj = new MLogger("log.txt");
             string Message = "This is a test message!";
 
@@ -22,9 +23,13 @@ namespace MikeDev.Test
             Assert.AreEqual(Result, "Warning : This is a test message!\n");
         }
 
+        /// <summary>
+        /// This test requires MLogger to correctly write logs.
+        /// </summary>
         [Test]
         public void TestB()
         {
+            System.IO.File.Create("log.txt").Close();
             MLogger obj = new MLogger("log.txt");
             string Message = "This is a test message!";
 
