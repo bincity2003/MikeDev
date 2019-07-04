@@ -51,6 +51,11 @@ namespace MikeDev.Debug
             }
         }
 
+        public string ProcessMessage(string message, bool includeTime = true, LogLevel level = LogLevel.Info)
+        {
+            return _InternalPrepareMessage(message, includeTime, level);
+        }
+
         /// <summary>
         /// LogLevel enum indicates the severity of the message.
         /// </summary>
