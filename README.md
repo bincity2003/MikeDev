@@ -7,7 +7,7 @@ Here, I'll publish all my (in free time) projects. Currently, it has:
 ## Prerequisites
 * .NET Core 3.0 SDK (currently SDK 3.0.100-preview6-012264)
 * Your favorite text editor
-* NUnit 3.0 or higher
+* NUnit 3.0 or higher (in order to run tests)
 ## Installation
 ### Git
 All you have to do is to clone this repository and build it:
