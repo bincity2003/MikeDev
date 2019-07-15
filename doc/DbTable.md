@@ -1,23 +1,31 @@
 # DbTable v1 Documentation
-Thank you for choosing our first product, DbTable! If you don't know, DbTable is
- a small-scale database, designed for C#. This documentation will show you how t
-o use it correctly!
----
+Thank you for choosing our first product, DbTable! If you don't know, DbTable is a small-scale database, designed for C#. This documentation will show you how to use it correctly!
 ## Table of Content
 1. [Installation]()
+
 2. [Usage]()
-2.1. [Overview]()
-2.2. [How to create it at first ?]()
-2.3. [Add some more funny entries!]()
-2.4. [Yay, I got his name, but how to look it up ?]()
-2.5. [Ouch, delete that naughty entry!]()
-2.6. [Nooo, I made a typo! How to fix it ?]()
+
+    2.1. [Overview]()
+    
+    2.2. [How to create it at first ?]()
+    
+    2.3. [Add some more funny entries!]()
+    
+    2.4. [Yay, I got his name, but how to look it up ?]()
+    
+    2.5. [Ouch, delete that naughty entry!]()
+    
+    2.6. [Nooo, I made a typo! How to fix it ?]()
+    
 3. [Advanced tools]()
-3.1. [Finally, I did it! But how to keep them for later use ?]()
-3.2. [I have an interesting string, how to view it ?]()
-3.3. [I have a .dbtable file, how to read it ?]()
-3.4. [Experimental: Command and filtering]()
----
+
+    3.1. [Finally, I did it! But how to keep them for later use ?]()
+    
+    3.2. [I have an interesting string, how to view it ?]()
+    
+    3.3. [I have a .dbtable file, how to read it ?]()
+    
+    3.4. [Experimental: Command and filtering]()
 
 ## Installation
 Before installing or using the package, you **must** install the following components:
@@ -38,8 +46,6 @@ $ git clone https://github.com/bincity2003/MikeDev.git
 $ cd MikeDev/src
 $ dotnet build
 ```
----
-
 ## Usage
 ### Overview
 In this section, we will demonstrate the ability of our product!
