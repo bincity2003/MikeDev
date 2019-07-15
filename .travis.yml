@@ -9,8 +9,7 @@ language: csharp
 mono: none
 install:
     - sudo snap alias dotnet-sdk.dotnet dotnet
+    - dotnet restore src/MikeDev.sln
 script:
-    - cd src/
-    - dotnet restore
-    - dotnet build
-    - dotnet test
+    - dotnet build src/MikeDev.sln
+    - dotnet test src/MikeDev.Test/MikeDev.Test.csproj

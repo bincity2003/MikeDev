@@ -13,7 +13,7 @@ Here, I'll publish all my (in free time) projects. Currently, it has:
 All you have to do is to clone this repository and build it:
 ```bash
 $ git clone https://github.com/bincity2003/MikeDev.git
-$ cd MikeDev
+$ cd MikeDev/src
 $ dotnet build
 ```
 ### NuGet package manager
