@@ -10,4 +10,8 @@
     <Copyright>MIT License</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build/MikeDev.Debug</OutputPath>
+  </PropertyGroup>
+
 </Project>
