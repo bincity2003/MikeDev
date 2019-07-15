@@ -1,11 +1,11 @@
 # DbTable v1 Documentation
 Thank you for choosing our first product, DbTable! If you don't know, DbTable is a small-scale database, designed for C#. This documentation will show you how to use it correctly!
 ## Table of Content
-1. [Installation]()
+1. [Installation](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#installation)
 
-2. [Usage]()
+2. [Usage](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#usage)
 
-    2.1. [Overview]()
+    2.1. [Overview](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#overview)
     
     2.2. [How to create it at first ?]()
     
