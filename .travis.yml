@@ -11,5 +11,5 @@ install:
     - sudo snap alias dotnet-sdk.dotnet dotnet
     - dotnet restore
 script:
-    - dotnet build
-    - dotnet test
+    - dotnet build src/MikeDev.sln
+    - dotnet test src/MikeDev.Test.csproj
