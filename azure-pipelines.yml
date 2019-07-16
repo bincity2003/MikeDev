@@ -25,3 +25,15 @@ steps:
 - script: dotnet build $(solution)
 
 - script: dotnet test $(testProject)
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit 3'
+    testResultsFiles: 'TestResult.xml' 
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    #mergeTestResults: false # Optional
+    #failTaskOnFailedTests: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    #publishRunAttachments: true # Optional
