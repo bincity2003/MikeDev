@@ -18,12 +18,8 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     version: '3.0.100-preview-010184'
-- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
+- script: dotnet restore $(solution)
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
