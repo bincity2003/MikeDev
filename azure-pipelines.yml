@@ -13,7 +13,7 @@ variables:
   solution: 'src/MikeDev.sln'
   testLocation: 'src/MikeDev.Test/'
   testProject: '$(testLocation)MikeDev.Test.csproj'
-  buildPlatform: 'AnyCPU'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
