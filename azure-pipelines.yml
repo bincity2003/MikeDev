@@ -13,7 +13,6 @@ variables:
   solution: 'src/MikeDev.sln'
   testLocation: 'src/MikeDev.Test/'
   testProject: '$(testLocation)MikeDev.Test.csproj'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
@@ -23,9 +22,9 @@ steps:
 
 - script: dotnet restore $(solution)
 
-- script: dotnet build $(solution) -p:Configuration=$(buildConfiguration) -p:Platform=$(buildPlatform)
+- script: dotnet build $(solution) -p:Configuration=$(buildConfiguration)
 
-- script: dotnet test $(testProject) -p:Configuration=$(buildConfiguration) -p:Platform=$(buildPlatform)
+- script: dotnet test $(testProject) -p:Configuration=$(buildConfiguration)
 
 - task: PublishTestResults@2
   inputs:
