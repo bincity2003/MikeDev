@@ -13,7 +13,7 @@ variables:
   solution: 'src/MikeDev.sln'
   testLocation: 'src/MikeDev.Test/'
   testProject: '$(testLocation)MikeDev.Test.csproj'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'AnyCPU'
   buildConfiguration: 'Release'
 
 steps:
@@ -23,15 +23,14 @@ steps:
 
 - script: dotnet restore $(solution)
 
-- script: dotnet build $(solution)
+- script: dotnet build $(solution) -p:Configuration=$(buildConfiguration) -p:Platform=$(buildPlatform)
 
-- script: dotnet test $(testProject)
+- script: dotnet test $(testProject) -p:Configuration=$(buildConfiguration) -p:Platform=$(buildPlatform)
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'NUnit 3'
-    testResultsFiles: 'TestResult.xml' 
-    searchFolder: '$(testLocation)'
+    testResultsFiles: '$(testLocation)/bin/$(buildConfiguration)/netcoreapp3.0/TestResult.xml' 
     #mergeTestResults: false # Optional
     #failTaskOnFailedTests: false # Optional
     #testRunTitle: # Optional
