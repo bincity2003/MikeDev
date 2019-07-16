@@ -29,7 +29,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'NUnit 3'
-    testResultsFiles: '$(testLocation)/bin/$(buildConfiguration)/netcoreapp3.0/TestResult.xml' 
+    testResultsFiles: '$(testLocation)bin/$(buildConfiguration)/netcoreapp3.0/TestResult.xml' 
     #mergeTestResults: false # Optional
     #failTaskOnFailedTests: false # Optional
     #testRunTitle: # Optional
