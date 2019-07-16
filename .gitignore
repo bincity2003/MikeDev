@@ -26,9 +26,10 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-build/*/netcoreapp3.0/[Bb]uild
-build/*/netcoreapp3.0/*.tar.gz
-build/*/netcoreapp3.0/*.zip
+build/*/netcoreapp3.*/[Bb]uild
+build/*/netcoreapp3.*/*.tar.gz
+build/*/netcoreapp3.*/*.zip
+build/*/netcoreapp3.*/*.pdb
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
