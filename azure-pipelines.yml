@@ -11,6 +11,7 @@ pool:
 
 variables:
   solution: 'src/MikeDev.sln'
+  testProject: 'src/MikeDev.Test/MikeDev.Test.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -20,14 +21,7 @@ steps:
     version: '3.0.100-preview-010184'
 
 - script: dotnet restore $(solution)
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- script: dotnet build $(solution)
+
+- script: dotnet test $(testProject)
