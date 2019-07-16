@@ -33,6 +33,8 @@ No known issue is found recently.
 ### MLogger
 No known issue is found recently.
 ## Contribution
-Any contribution is welcome! But you should first refer to our [Contribution Guidelines] to get more information on how to involve!
+Any contribution is welcome! But you should first refer to our
+[Contribution Guidelines](https://github.com/bincity2003/MikeDev/blob/master/CONTRIBUTING.md)
+to get more information on how to involve!
 ## License
 MikeDev repo is licensed under [MIT License](https://github.com/bincity2003/MikeDev/blob/master/LICENSE)
