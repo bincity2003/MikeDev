@@ -11,7 +11,8 @@ pool:
 
 variables:
   solution: 'src/MikeDev.sln'
-  testProject: 'src/MikeDev.Test/MikeDev.Test.csproj'
+  testLocation: 'src/MikeDev.Test/'
+  testProject: '$(testLocation)MikeDev.Test.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -30,7 +31,7 @@ steps:
   inputs:
     testResultsFormat: 'NUnit 3'
     testResultsFiles: 'TestResult.xml' 
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    searchFolder: '$(testLocation)'
     #mergeTestResults: false # Optional
     #failTaskOnFailedTests: false # Optional
     #testRunTitle: # Optional
