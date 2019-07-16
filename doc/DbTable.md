@@ -1,11 +1,17 @@
 # DbTable v1 Documentation
 Thank you for choosing our first product, DbTable! If you don't know, DbTable is a small-scale database, designed for C#. This documentation will show you how to use it correctly!
 ## Table of Content
-1. [Installation](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#installation)
+1. [Installation](https://github.com/bincity2003/MikeDev/blob/master/doc/DbTable.md#installation)
+    
+    1.1. [Using NuGet]()
 
-2. [Usage](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#usage)
+    1.2. [Manual installation]()
 
-    2.1. [Overview](https://github.com/bincity2003/MikeDev/blob/add-documentation/doc/DbTable.md#overview)
+    1.3. [Self-built binary]()
+
+2. [Usage](https://github.com/bincity2003/MikeDev/blob/master/doc/DbTable.md#usage)
+
+    2.1. [Overview](https://github.com/bincity2003/MikeDev/blob/master/doc/DbTable.md#overview)
     
     2.2. [How to create it at first ?]()
     
@@ -39,6 +45,9 @@ PM is C# developers' best friend when working with dependencies.
 PM> Install-Package MikeDev.Db
 ```
 However, if you don't want to get the latest release, you can specify ```-Version``` attribute (Please refer to [NuGet page](https://www.nuget.org/packages/MikeDev.Db/) for all version numbers).
+#### Install the build manually
+If you hate NuGet for some reasons, you can, of course, download the binaries from our [GitHub Release page]()
+Then, decompress it and include it as dependencies in your project!
 #### Build it yourself!
 You can obtain the source code and build it:
 ```bash
