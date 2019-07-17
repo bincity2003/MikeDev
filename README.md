@@ -1,4 +1,4 @@
-# MikeDev [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?color=red&label=License&logo=MIT&style=plastic) ![GitHub release](https://img.shields.io/github/release/bincity2003/MikeDev.svg?logoColor=orange)
+# MikeDev [![Build Status](https://dev.azure.com/bincity2003/MikeDev/_apis/build/status/bincity2003.MikeDev?branchName=master)](https://dev.azure.com/bincity2003/MikeDev/_build/latest?definitionId=3&branchName=master) [![Build Status](https://travis-ci.org/bincity2003/MikeDev.svg?branch=master)](https://travis-ci.org/bincity2003/MikeDev) ![GitHub](https://img.shields.io/github/license/bincity2003/MikeDev.svg?color=red&label=License&logo=MIT) ![GitHub release](https://img.shields.io/github/release/bincity2003/MikeDev.svg?logoColor=orange)
 This is the place where I will stored all general-purpose project in the future.
 ## Description
 Here, I'll publish all my (in free time) projects. Currently, it has:
@@ -33,7 +33,8 @@ No known issue is found recently.
 ### MLogger
 No known issue is found recently.
 ## Contribution
-Currently, I haven't think of code contribution. I'll probably consider it in the future. 
-But feel free to propose new issues (bugs, improvements, new features).
+Any contribution is welcome! But you should first refer to our
+[Contribution Guidelines](https://github.com/bincity2003/MikeDev/blob/master/CONTRIBUTING.md)
+to get more information on how to involve!
 ## License
 MikeDev repo is licensed under [MIT License](https://github.com/bincity2003/MikeDev/blob/master/LICENSE)

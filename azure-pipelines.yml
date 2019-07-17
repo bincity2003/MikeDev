@@ -7,12 +7,12 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-16.04'
 
 variables:
   solution: 'src/MikeDev.sln'
-  testProject: 'src/MikeDev.Test/MikeDev.Test.csproj'
-  buildPlatform: 'Any CPU'
+  testLocation: 'src/MikeDev.Test/'
+  testProject: '$(testLocation)MikeDev.Test.csproj'
   buildConfiguration: 'Release'
 
 steps:
@@ -22,6 +22,17 @@ steps:
 
 - script: dotnet restore $(solution)
 
-- script: dotnet build $(solution)
+- script: dotnet build $(solution) -p:Configuration=$(buildConfiguration)
 
-- script: dotnet test $(testProject)
+- script: dotnet test $(testProject) -p:Configuration=$(buildConfiguration)
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit 3'
+    testResultsFiles: '$(testLocation)bin/$(buildConfiguration)/netcoreapp3.0/TestResult.xml' 
+    #mergeTestResults: false # Optional
+    #failTaskOnFailedTests: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    #publishRunAttachments: true # Optional
