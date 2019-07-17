@@ -23,7 +23,7 @@ PM> Install-Package <package_name>
 ```
 Available package names are:
 ```
-MikeDev.Db          (for DbTable)
+MikeDev.Database    (for DbTable)
 MikeDev.Debug       (for MLogger)
 ```
 **After installation, just start working!**
