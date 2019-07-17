@@ -1,4 +1,4 @@
-﻿using MikeDev.Db;
+using MikeDev.Database;
 using NUnit.Framework;
 
 namespace MikeDev.Test
@@ -278,10 +278,10 @@ namespace MikeDev.Test
             obj.AddEntry(Names, Values);
             Assert.IsTrue(obj.Count == 5);
 
-            obj.Export("C:\\Users\\Thanh Cong\\Desktop\\test.dbtable");
+            obj.Export("test.dbtable");
             obj.Dispose();
 
-            obj = new DbTable("C:\\Users\\Thanh Cong\\Desktop\\test.dbtable");
+            obj = new DbTable("test.dbtable");
 
             Assert.IsTrue(obj.Count == 5);
             Assert.IsTrue(obj.GetFieldLength == 3);
