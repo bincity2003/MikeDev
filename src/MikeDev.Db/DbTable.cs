@@ -206,8 +206,7 @@ namespace MikeDev.Db
         /// <param name="values">The new set of fields' value.</param>
         public void ReplaceEntry(string name, params string[] values)
         {
-            _InternalReplaceEntry(name, values, out string Index);
-            _DataTable[Index] = values;
+            _InternalReplaceEntry(name, values);
         }
 
         /// <summary>
@@ -337,12 +336,13 @@ namespace MikeDev.Db
         /// <summary>
         /// Internal method for ReplaceEntry.
         /// </summary>
-        private void _InternalReplaceEntry(string name, string[] values, out string Index)
+        private void _InternalReplaceEntry(string name, string[] values)
         {
             // Self-explanatory
             try
             {
-                Index = _EntryNames[name];
+                string Index = _EntryNames[name];
+                _DataTable[Index] = values;
             }
             catch (KeyNotFoundException)
             {

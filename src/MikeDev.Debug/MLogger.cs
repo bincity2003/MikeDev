@@ -42,13 +42,18 @@ namespace MikeDev.Debug
             try
             {
                 string Data = _InternalPrepareMessage(message, includeTime, level);
-                System.IO.File.WriteAllText(CapturedFilename, Data);
+                System.IO.File.AppendAllText(CapturedFilename, Data);
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+
+        public string ProcessMessage(string message, bool includeTime = true, LogLevel level = LogLevel.Info)
+        {
+            return _InternalPrepareMessage(message, includeTime, level);
         }
 
         /// <summary>
@@ -67,7 +72,7 @@ namespace MikeDev.Debug
         private string _InternalPrepareMessage(string message, bool includeTime, LogLevel level)
         {
             // Add timestamp
-            string Message = includeTime ? $"[{DateTime.Now}]" : "";
+            string Message = includeTime ? $"[{DateTime.Now}] " : "";
 
             // Add severity
             Message += $"{level.ToString()} : ";

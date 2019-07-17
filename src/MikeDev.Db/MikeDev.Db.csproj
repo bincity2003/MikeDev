@@ -3,11 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackageId>MikeDev.Db</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
     <Company>MikeDev</Company>
-    <Authors>M1keD3v</Authors>
+    <Authors>M1keD3v, bincity2003</Authors>
     <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
-    <Copyright>MIT License</Copyright>    
+    <Copyright>MIT License</Copyright>
+    <LangVersion>default</LangVersion>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build/MikeDev.Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
