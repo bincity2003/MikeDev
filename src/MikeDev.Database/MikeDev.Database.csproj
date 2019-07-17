@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <PackageId>MikeDev.Db</PackageId>
-    <Version>1.0.2</Version>
+    <PackageId>MikeDev.Database</PackageId>
+    <Version>1.0.0</Version>
     <Company>MikeDev</Company>
     <Authors>M1keD3v, bincity2003</Authors>
     <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../build/MikeDev.Db</OutputPath>
+    <OutputPath>../../build/MikeDev.Database</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
