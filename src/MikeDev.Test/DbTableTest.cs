@@ -1,4 +1,4 @@
-using MikeDev.Db;
+using MikeDev.Database;
 using NUnit.Framework;
 
 namespace MikeDev.Test
