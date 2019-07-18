@@ -49,14 +49,13 @@ namespace MikeDev.Config
         }
 
         /// <summary>
-        /// Get or set the value of an attribute.
+        /// Get the value of an attribute.
         /// </summary>
         /// <param name="name">Name of the attribute.</param>
         /// <returns>Value of the attribute.</returns>
         public string this[string name]
         {
-            get => _Storage.Element(name).Value;
-            set => _Storage.Element(name).Value = value;
+            get => _Names.Contains(name) ? _Storage.Element(name).Value : throw new ArgumentException("Name not exists!");
         }
 
         /// <summary>
