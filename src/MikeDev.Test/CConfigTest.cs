@@ -18,7 +18,7 @@ namespace MikeDev.Test
         }
 
         /// <summary>
-        /// This test requires CConfig to correctly add new attribute(s).
+        /// This test requires CConfig to correctly add and read new attribute(s).
         /// </summary>
         [Test]
         public void TestB()
@@ -29,6 +29,12 @@ namespace MikeDev.Test
             Assert.IsTrue(config.Count == 1);
             Assert.IsTrue(config.Attributes[0] == "name");
             Assert.IsTrue(config["name"] == "Mike");
+
+            config.Add("age", "16");
+
+            Assert.IsTrue(config.Count == 2);
+            Assert.IsTrue(config.Attributes[1] == "age");
+            Assert.IsTrue(config["age"] == "16");
         }
     }
 }
