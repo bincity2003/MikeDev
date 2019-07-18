@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace MikeDev.Config
@@ -6,6 +8,7 @@ namespace MikeDev.Config
     public class CConfig
     {
         XElement _Storage;
+        List<string> _Names;
 
         /// <summary>
         /// Create new empty config.
@@ -13,6 +16,7 @@ namespace MikeDev.Config
         public CConfig()
         {
             _Storage = new XElement("configuration");
+            _Names = new List<string>();
         }
 
         /// <summary>
@@ -27,6 +31,12 @@ namespace MikeDev.Config
             {
                 throw new Exception("Not a configuration file!");
             }
+
+            _Names = new List<string>();
+            foreach (var item in _Storage.Elements())
+            {
+                _Names.Add(item.Name.LocalName);
+            }
         }
 
         /// <summary>
@@ -39,19 +49,14 @@ namespace MikeDev.Config
         }
 
         /// <summary>
-        /// Get the value of an attribute.
+        /// Get or set the value of an attribute.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public string this[string name] => _Storage.Element(name).Value;
-
-        /// <summary>
-        /// Export CConfig to an XML-string.
-        /// </summary>
-        /// <returns></returns>
-        public string Export()
+        /// <param name="name">Name of the attribute.</param>
+        /// <returns>Value of the attribute.</returns>
+        public string this[string name]
         {
-            return _Storage.ToString();
+            get => _Storage.Element(name).Value;
+            set => _Storage.Element(name).Value = value;
         }
 
         /// <summary>
@@ -62,6 +67,40 @@ namespace MikeDev.Config
         {
             System.IO.File.Create(cconfigFile);
             _Storage.Save(cconfigFile);
+        }
+
+        /// <summary>
+        /// Add a new attribute and its value.
+        /// </summary>
+        /// <param name="name">Name of the attribute.</param>
+        /// <param name="value">Value of the attribute.</param>
+        public void Add(string name, string value)
+        {
+            if (!_Names.Contains(name))
+            {
+                _Storage.Add(new XElement(name, value));
+            }
+            else
+            {
+                throw new ArgumentException("Name already exists!");
+            }
+        }
+
+        /// <summary>
+        /// Remove an attribute.
+        /// </summary>
+        /// <param name="name">Name of the attribute.</param>
+        public void Remove(string name)
+        {
+            if (_Names.Contains(name))
+            {
+                XNode node = _Storage.Elements().Where(x => x.Name.LocalName == name).ToList()[0];
+                node.Remove();
+            }
+            else
+            {
+                throw new ArgumentException("Name not exists!");
+            }
         }
     }
 }
