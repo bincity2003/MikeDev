@@ -62,6 +62,28 @@ namespace MikeDev.Test
             Assert.Throws<ArgumentException>(_TestC_B);
         }
 
+        /// <summary>
+        /// This test requires CConfig to correctly import/export data.
+        /// </summary>
+        [Test]
+        public void TestD()
+        {
+            config = new CConfig();
+            config.Add("name", "Mike");
+            config.Add("age", "16");
+            config.Add("occupation", "student");
+
+            Assert.IsTrue(config.Count == 3);
+
+            config.Export("config.cc");
+
+            config = null;
+            config = new CConfig("config.cc");
+
+            Assert.IsTrue(config.Count == 3);
+        }
+        #region TestC supplement
+
         public void _TestC_A()
         {
             _ = config["name"];
@@ -70,5 +92,7 @@ namespace MikeDev.Test
         {
             _ = config["age"];
         }
+
+        #endregion
     }
 }
