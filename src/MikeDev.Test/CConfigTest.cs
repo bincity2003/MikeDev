@@ -36,5 +36,25 @@ namespace MikeDev.Test
             Assert.IsTrue(config.Attributes[1] == "age");
             Assert.IsTrue(config["age"] == "16");
         }
+
+        /// <summary>
+        /// This test requires CConfig to correctly remove attribute(s).
+        /// </summary>
+        [Test]
+        public void TestC()
+        {
+            CConfig config = new CConfig();
+            config.Add("name", "Mike");
+            config.Add("age", "16");
+
+            Assert.IsTrue(config.Count == 2);
+            Assert.IsTrue(config.Attributes.Length == 2);
+
+            config.Remove("name");
+            Assert.IsTrue(config.Count == 1);
+
+            config.Remove("age");
+            Assert.IsTrue(config.Count == 0);
+        }
     }
 }
