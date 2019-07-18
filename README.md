@@ -3,11 +3,11 @@ This is the place where I will stored all general-purpose project in the future.
 ## Description
 Ever feeling hard to implement a brand new database for your project ? No more. Because you have us! This repository will bring you many useful libraries that one day you will need!
 ## All releases
-| Status                 | Package name     | Version  | Releases       |
-|------------------------|------------------|----------|----------------|
-| ![Build Status][da-bd] | MikeDev.Database | 1.1.0    | [NuGet][da-re] |
-| ![Build Status][de-bd] | MikeDev.Debug    | 1.1.0    | [NuGet][de-re] |
-| ![Build Status][co-bd] | MikeDev.Config   | 1.1.0    | [NuGet][co-re] |
+| Status                 | Package name     | Version  | Download        | Releases       |
+|------------------------|------------------|----------|-----------------|----------------|
+| ![Build Status][da-bd] | MikeDev.Database | 1.1.0    | ![NuGet][da-dl] | [NuGet][da-re] |
+| ![Build Status][de-bd] | MikeDev.Debug    | 1.1.0    | ![NuGet][de-dl] | [NuGet][de-re] |
+| ![Build Status][co-bd] | MikeDev.Config   | 1.1.0    | ![NuGet][co-dl] | [NuGet][co-re] |
 ## Prerequisites
 ### Development
 * .NET Core 3.0 SDK
@@ -54,3 +54,6 @@ MikeDev repo is licensed under [MIT License](https://github.com/bincity2003/Mike
 [da-bd]: https://travis-ci.org/bincity2003/MikeDev.svg?branch=dbtable-development
 [de-bd]: https://travis-ci.org/bincity2003/MikeDev.svg?branch=mlogger-development
 [co-bd]: https://travis-ci.org/bincity2003/MikeDev.svg?branch=cconfig-development
+[da-dl]: https://img.shields.io/nuget/dt/MikeDev.Database.svg
+[de-dl]: https://img.shields.io/nuget/dt/MikeDev.Debug.svg
+[co-dl]: https://img.shields.io/nuget/dt/MikeDev.Config.svg
