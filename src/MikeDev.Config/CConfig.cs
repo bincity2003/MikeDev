@@ -89,6 +89,7 @@ namespace MikeDev.Config
             if (!_Names.Contains(name))
             {
                 _Storage.Add(new XElement(name, value));
+                _Names.Add(name);
             }
             else
             {
