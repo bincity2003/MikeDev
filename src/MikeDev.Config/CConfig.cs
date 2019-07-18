@@ -60,6 +60,16 @@ namespace MikeDev.Config
         }
 
         /// <summary>
+        /// Get the number of attributes in this config.
+        /// </summary>
+        public int Count => _Names.Count;
+
+        /// <summary>
+        /// Get the name of attributes in this config.
+        /// </summary>
+        public string[] Attributes => _Names.ToArray();
+
+        /// <summary>
         /// Export CConfig to file.
         /// </summary>
         /// <param name="cconfigFile">Path to CConfig file. Will be overwritten.</param>
