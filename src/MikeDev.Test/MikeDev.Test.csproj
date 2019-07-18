@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MikeDev.Config\MikeDev.Config.csproj" />
     <ProjectReference Include="..\MikeDev.Database\MikeDev.Database.csproj" />
     <ProjectReference Include="..\MikeDev.Debug\MikeDev.Debug.csproj" />
   </ItemGroup>

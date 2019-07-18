@@ -16,7 +16,7 @@ submitting bug reports and feature requests or writing code which can be incorpo
 ## Your responsibilities
 Once you've decided to contribute, please remember to follow these rules:
 * Ensure cross-platform compability for **every single change** that's accepted (Windows, Mac, Ubuntu Linux).
-* Ensure that your code follows our [Coding Style]().
+* Ensure that your code follows our [Coding Style](https://github.com/bincity2003/MikeDev/blob/master/CONTRIBUTING.md#coding-style).
 * Before changing anything, check the
 [Issue Tracker](https://github.com/bincity2003/MikeDev/issues)
 first whether someone is working on it.

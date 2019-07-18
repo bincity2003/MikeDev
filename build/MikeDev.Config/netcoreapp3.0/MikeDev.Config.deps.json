@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.0": {
-      "MikeDev.Debug/1.1.0": {
+      "MikeDev.Config/1.0.0": {
         "runtime": {
-          "MikeDev.Debug.dll": {}
+          "MikeDev.Config.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "MikeDev.Debug/1.1.0": {
+    "MikeDev.Config/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <PackageId>MikeDev.Database</PackageId>
+    <PackageId>MikeDev.Config</PackageId>
     <Version>1.1.0</Version>
     <Company>MikeDev</Company>
-    <Authors>M1keD3v, bincity2003</Authors>
+    <Authors>bincity2003</Authors>
     <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <LangVersion>default</LangVersion>    
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,11 +16,7 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../build/MikeDev.Database</OutputPath>
+    <OutputPath>../../build/MikeDev.Config</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
 
 </Project>
