@@ -113,10 +113,5 @@ namespace MikeDev.Config
                 throw new ArgumentException("Name not exists!");
             }
         }
-
-        public string Read(string name)
-        {
-            return _Names.Contains(name) ? _Storage.Element(name).Value : throw new ArgumentException("Name not exists!");
-        }
     }
 }
