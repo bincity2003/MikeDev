@@ -16,5 +16,19 @@ namespace MikeDev.Test
             Assert.IsTrue(config.Count == 0);
             Assert.IsTrue(config.Attributes.Length == 0);
         }
+
+        /// <summary>
+        /// This test requires CConfig to correctly add new attribute(s).
+        /// </summary>
+        [Test]
+        public void TestB()
+        {
+            CConfig config = new CConfig();
+            config.Add("name", "Mike");
+
+            Assert.IsTrue(config.Count == 1);
+            Assert.IsTrue(config.Attributes[0] == "name");
+            Assert.IsTrue(config["name"] == "Mike");
+        }
     }
 }
