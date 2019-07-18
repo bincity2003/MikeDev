@@ -7,9 +7,13 @@
     <Company>MikeDev</Company>
     <Authors>M1keD3v, bincity2003</Authors>
     <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
-    <Copyright>MIT License</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <LangVersion>default</LangVersion>    
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\license\license.txt" Pack="true" PackagePath="LICENSE.txt"/>
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>../../build/MikeDev.Database</OutputPath>
