@@ -59,5 +59,14 @@ namespace MikeDev.Test
             config.Remove("age");
             Assert.IsTrue(config.Count == 0);
         }
+
+        public string _TestC_A()
+        {
+            return config["name"];
+        }
+        public string _TestC_B()
+        {
+            return config["age"];
+        }
     }
 }
