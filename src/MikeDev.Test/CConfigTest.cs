@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MikeDev.Config;
+using NUnit.Framework;
 
 namespace MikeDev.Test
 {
-    class CConfigTest
+    [TestFixture]
+    internal class CConfigTest
     {
+        /// <summary>
+        /// This test requires CConfig to correctly create new empty config.
+        /// </summary>
+        public void TestA()
+        {
+
+        }
     }
 }
