@@ -107,6 +107,7 @@ namespace MikeDev.Config
             {
                 XNode node = _Storage.Elements().Where(x => x.Name.LocalName == name).ToList()[0];
                 node.Remove();
+                _Names.Remove(name);
             }
             else
             {
