@@ -5,9 +5,9 @@ Ever feeling hard to implement a brand new database for your project ? No more. 
 ## All releases
 | Status                 | Package name     | Version  | Releases       |
 |------------------------|------------------|----------|----------------|
-| ![Build Status][da-bd] | MikeDev.Database | 1.0.0    | [NuGet][da-re] |
-| ![Build Status][de-bd] | MikeDev.Debug    | 1.0.1    | [NuGet][de-re] |
-| ![Build Status][co-bd] | MikeDev.Config   | 1.0.0    | [NuGet][co-re] |
+| ![Build Status][da-bd] | MikeDev.Database | 1.1.0    | [NuGet][da-re] |
+| ![Build Status][de-bd] | MikeDev.Debug    | 1.1.0    | [NuGet][de-re] |
+| ![Build Status][co-bd] | MikeDev.Config   | 1.1.0    | [NuGet][co-re] |
 ## Prerequisites
 ### Development
 * .NET Core 3.0 SDK
