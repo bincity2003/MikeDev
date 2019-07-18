@@ -54,19 +54,21 @@ namespace MikeDev.Test
             Assert.IsTrue(config.Attributes.Length == 2);
 
             config.Remove("name");
-            Assert.IsTrue(config.Count == 1); 
+            Assert.IsTrue(config.Count == 1);
+            Assert.Throws<ArgumentException>(_TestC_A);
 
             config.Remove("age");
             Assert.IsTrue(config.Count == 0);
+            Assert.Throws<ArgumentException>(_TestC_B);
         }
 
-        public string _TestC_A()
+        public void _TestC_A()
         {
-            return config["name"];
+            _ = config["name"];
         }
-        public string _TestC_B()
+        public void _TestC_B()
         {
-            return config["age"];
+            _ = config["age"];
         }
     }
 }
