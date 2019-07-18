@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -25,7 +26,8 @@ namespace MikeDev.Config
         /// <param name="cconfigFile">Path to CConfig file.</param>
         public CConfig(string cconfigFile)
         {
-            _Storage = XElement.Load(cconfigFile);
+            cconfigFile = File.ReadAllText(cconfigFile);
+            _Storage = XElement.Parse(cconfigFile);
 
             if (_Storage.Name.LocalName != "configuration")
             {
@@ -74,8 +76,8 @@ namespace MikeDev.Config
         /// <param name="cconfigFile">Path to CConfig file. Will be overwritten.</param>
         public void Export(string cconfigFile)
         {
-            System.IO.File.Create(cconfigFile);
-            _Storage.Save(cconfigFile);
+            File.Create(cconfigFile).Close();
+            File.WriteAllText(cconfigFile, _Storage.ToString());
         }
 
         /// <summary>
