@@ -9,9 +9,11 @@ Ever feeling hard to implement a brand new database for your project ? No more. 
 | ![Build Status][de-bd] | MikeDev.Debug    | 1.0.1    | [NuGet][de-re] |
 | ![Build Status][co-bd] | MikeDev.Config   | 1.0.0    | [NuGet][co-re] |
 ## Prerequisites
-* .NET Core 3.0 SDK (currently SDK 3.0.100-preview6-012264)
-* Your favorite text editor
-* NUnit 3.0 or higher (in order to run tests)
+### Development
+* .NET Core 3.0 SDK
+* NUnit 3.0
+### Runtime
+* .NET Core 3.0 Runtime
 ## Installation
 ### Git
 All you have to do is to clone this repository and build it:
