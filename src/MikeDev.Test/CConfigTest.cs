@@ -82,6 +82,7 @@ namespace MikeDev.Test
 
             Assert.IsTrue(config.Count == 3);
         }
+
         #region TestC supplement
 
         public void _TestC_A()
