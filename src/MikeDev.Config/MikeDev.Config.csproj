@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>MikeDev.Config</PackageId>
+    <Version>1.0.0</Version>
+    <Company>MikeDev</Company>
+    <Authors>bincity2003</Authors>
+    <Description>Please refer to https://github.com/bincity2003/MikeDev for more infomation.</Description>
+    <Copyright>MIT License</Copyright>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build/MikeDev.Config</OutputPath>
+  </PropertyGroup>
+
+</Project>
