@@ -125,8 +125,8 @@ DbTable table = new DbTable(new string[] { "Name", "Age", "Occupation" });
 
 string[] names = { "Mike", "John", "Kate" };
 string[][] values = { { "Mike Nguyen", "16", "Student" },
-					  { "John Tran", "18", "Teacher" },
-					  { "Kate Huynh", "14", "Student"} };
+		      { "John Tran", "18", "Teacher" },
+		      { "Kate Huynh", "14", "Student"} };
 
 table.Add(names, values);
 ```
