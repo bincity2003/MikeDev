@@ -116,7 +116,7 @@ namespace MikeDev.Database
         /// Convert JSON string to instance.
         /// </summary>
         /// <param name="data">Data string</param>
-        /// <param name="isData">*SIGNATURE* Leave default. Won't work if set to false.</param>
+        /// <param name="isData">*SIGNATURE* Must be set to True. Won't work if set to false.</param>
         public DbTable(string data, bool isData)
         {
             if (isData)
