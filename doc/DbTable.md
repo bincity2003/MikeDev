@@ -180,6 +180,7 @@ table.Add("John", "John Tran", "18", "Teacher");
 
 string[] names = { "Mike", "John" };
 table.Remove(names);
+```
 #### FAQ:
 **Q**: What if I didn't give it the correct name ?
 
