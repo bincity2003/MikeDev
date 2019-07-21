@@ -33,6 +33,12 @@ When I called method ...
 <!-- What did you get ? --->
 I got ... instead.
 
+### Environment information
+<!-- Answer below! --->
+* OS:
+* Package version:
+* SDK version:
+
 ### Additional content
 <!-- What else do we need to know more --->
 There is one more thing ...
