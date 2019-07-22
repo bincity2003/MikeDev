@@ -46,9 +46,11 @@ namespace MikeDev.Cryptography
             return ComputeHash(obj.ToString());
         }
 
+
         /// <summary>
         /// Compute hash with SHA512 algorithm. Internal.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static string _InternalComputeHash(byte[] byteArray)
         {
             throw new NotImplementedException();
