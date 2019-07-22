@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikeDev.Test", "MikeDev.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikeDev.Debug", "MikeDev.Debug\MikeDev.Debug.csproj", "{A9973991-2691-42EF-AE6D-04A2B510E7B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikeDev.Config", "MikeDev.Config\MikeDev.Config.csproj", "{97C4CA2C-0F4F-4871-90C2-AB6510978D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikeDev.Config", "MikeDev.Config\MikeDev.Config.csproj", "{97C4CA2C-0F4F-4871-90C2-AB6510978D95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikeDev.Cryptography", "MikeDev.Cryptography\MikeDev.Cryptography.csproj", "{28B402AB-3259-4D11-9199-79D65C0E9E0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{97C4CA2C-0F4F-4871-90C2-AB6510978D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97C4CA2C-0F4F-4871-90C2-AB6510978D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97C4CA2C-0F4F-4871-90C2-AB6510978D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B402AB-3259-4D11-9199-79D65C0E9E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B402AB-3259-4D11-9199-79D65C0E9E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B402AB-3259-4D11-9199-79D65C0E9E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B402AB-3259-4D11-9199-79D65C0E9E0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
