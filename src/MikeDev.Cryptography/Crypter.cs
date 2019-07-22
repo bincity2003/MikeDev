@@ -91,6 +91,9 @@ namespace MikeDev.Cryptography
         }
 
         public static string Encrypt()
+        {
+
+        }
 
         #endregion
     }

@@ -7,7 +7,7 @@ namespace MikeDev.Cryptography
     /// <summary>
     /// Class implementing IHashable can be used in MikeDev.Cryptography suite
     /// </summary>
-    public interface IHashable
+    public interface ICrypto
     {
         /// <summary>
         /// Return (cryptographically secure) UNIQUE information of the object.
