@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace MikeDev.Cryptography
         public static string ComputeHash(byte[] byteArray)
         {
             return _InternalComputeHash(byteArray);
-        }
+        }      
 
         /// <summary>
         /// Compute hash of a System.String object.
@@ -48,6 +49,14 @@ namespace MikeDev.Cryptography
             return ComputeHash(obj.ToString());
         }
 
+        /// <summary>
+        /// Compute hash of an object type <typeparamref name="T"/>
+        /// </summary>
+        /// <param name="obj"><typeparamref name="T"/> object to be hashed.</param>
+        public static string ComputeHash<T>(T obj) where T : IHashable
+        {
+            return ComputeHash(obj.GetUniqueInfo());
+        }
 
         /// <summary>
         /// Compute hash with SHA512 algorithm. Internal.
