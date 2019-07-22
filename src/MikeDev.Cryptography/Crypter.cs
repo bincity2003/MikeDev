@@ -11,6 +11,8 @@ namespace MikeDev.Cryptography
     {
         private static readonly SHA512 sha512 = SHA512.Create();
 
+        #region ComputeHash suite
+
         /// <summary>
         /// Compute hash of a System.Byte[] object.
         /// </summary>
@@ -73,5 +75,7 @@ namespace MikeDev.Cryptography
 
             return builder.ToString();
         }
+
+        #endregion
     }
 }
