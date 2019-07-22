@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -19,7 +18,7 @@ namespace MikeDev.Cryptography
         public static string ComputeHash(byte[] byteArray)
         {
             return _InternalComputeHash(byteArray);
-        }      
+        }
 
         /// <summary>
         /// Compute hash of a System.String object.
