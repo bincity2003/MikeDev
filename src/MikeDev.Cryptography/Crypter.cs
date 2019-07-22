@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,6 +9,8 @@ namespace MikeDev.Cryptography
     /// </summary>
     public static class Crypter
     {
+        private static readonly SHA512 sha512 = SHA512.Create();
+
         /// <summary>
         /// Compute hash of a System.Byte[] object.
         /// </summary>
@@ -17,7 +18,7 @@ namespace MikeDev.Cryptography
         public static string ComputeHash(byte[] byteArray)
         {
             return _InternalComputeHash(byteArray);
-        }      
+        }
 
         /// <summary>
         /// Compute hash of a System.String object.
@@ -54,7 +55,15 @@ namespace MikeDev.Cryptography
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static string _InternalComputeHash(byte[] byteArray)
         {
-            throw new NotImplementedException();
+            byteArray = sha512.ComputeHash(byteArray);
+
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                builder.Append(byteArray[i].ToString("x2"));
+            }
+
+            return builder.ToString();
         }
     }
 }
