@@ -79,6 +79,15 @@ namespace MikeDev.Cryptography
         #endregion
 
         #region Encrypt/Decrypt suite
+        /// <summary>
+        /// Encrypt a byte array using passphrase.
+        /// </summary>
+        /// <param name="data">Data to be encrypted.</param>
+        /// <param name="passphrase">Passphrase to encrypt data.</param>
+        public static string Encrypt(byte[] data, string passphrase)
+        {
+
+        }
 
         /// <summary>
         /// Encrypt a string using passphrase.
@@ -86,11 +95,6 @@ namespace MikeDev.Cryptography
         /// <param name="data">String to be encrypted.</param>
         /// <param name="passphrase">Passphrase to encrypt data.</param>
         public static string Encrypt(string data, string passphrase)
-        {
-
-        }
-
-        public static string Encrypt()
         {
 
         }
