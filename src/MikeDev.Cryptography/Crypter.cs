@@ -9,7 +9,9 @@ namespace MikeDev.Cryptography
     /// </summary>
     public static class Crypter
     {
+        private static readonly RandomNumberGenerator RNG = RandomNumberGenerator.Create();
         private static readonly SHA512 sha512 = SHA512.Create();
+        private static Rfc2898DeriveBytes PBKDF2;
 
         #region ComputeHash suite
 
@@ -79,6 +81,7 @@ namespace MikeDev.Cryptography
         #endregion
 
         #region Encrypt/Decrypt suite
+
         /// <summary>
         /// Encrypt a byte array using passphrase.
         /// </summary>
@@ -86,17 +89,147 @@ namespace MikeDev.Cryptography
         /// <param name="passphrase">Passphrase to encrypt data.</param>
         public static string Encrypt(byte[] data, string passphrase)
         {
+            byte[] EncryptionKey = _InternalRandomKeygen(16);
+            byte[][] EncryptionParams = _InternalEncryptionKeygen(EncryptionKey, passphrase);
 
+            byte[] EncryptedKey = EncryptionParams[0];
+            byte[] IntegrityKey = EncryptionParams[1];
+            byte[] EKSalt = EncryptionParams[2];
+            byte[] IV = EncryptionParams[3];
+
+            byte[] EncryptedData = _InternalEncrypt(data, EncryptionKey, IV);
+
+            byte[] result = _InternalArrayMerger(EncryptedData, EncryptedKey, IntegrityKey, EKSalt, IV);
+
+            return Convert.ToBase64String(result);
+        }
+
+        public static byte[] Decrypt(string encryptedData, string passphrase)
+        {
+            byte[] Data = Convert.FromBase64String(encryptedData);
+
+            byte[] IV = new byte[16];
+            byte[] EKSalt = new byte[8];
+            byte[] IntegrityKey = new byte[16];
+            byte[] EncryptedKey = new byte[16];
+
+            int Length = Data.Length - 16;
+            Array.Copy(Data, Length, IV, 0, 16);
+
+            Length -= 8;
+            Array.Copy(Data, Length, EKSalt, 0, 8);
+
+            Length -= 16;
+            Array.Copy(Data, Length, IntegrityKey, 0, 16);
+
+            Length -= 16;
+            Array.Copy(Data, Length, EncryptedKey, 0, 16);
+
+            byte[] EncryptedData = new byte[Length];
+            Array.Copy(Data, 0, EncryptedData, 0, Length);
+        }
+
+        #region External CryptoSuite
+
+        /// <summary>
+        /// Internal CryptoSuite.
+        /// </summary>
+        private static byte[] _InternalEncrypt(byte[] data, byte[] key, byte[] iv)
+        {
+            using var aes = Aes.Create();
+            aes.KeySize = 128;
+            aes.BlockSize = 128;
+            aes.Padding = PaddingMode.Zeros;
+
+            aes.Key = key;
+            aes.IV = iv;
+
+            using var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+            return _InternalCryptoPerformer(data, encryptor);
         }
 
         /// <summary>
-        /// Encrypt a string using passphrase.
+        /// Internal CryptoSuite.
         /// </summary>
-        /// <param name="data">String to be encrypted.</param>
-        /// <param name="passphrase">Passphrase to encrypt data.</param>
-        public static string Encrypt(string data, string passphrase)
+        private static byte[] _InternalDecrypt(byte[] data, byte[] key, byte[] iv)
         {
+            using var aes = Aes.Create();
+            aes.KeySize = 128;
+            aes.BlockSize = 128;
+            aes.Padding = PaddingMode.Zeros;
 
+            aes.Key = key;
+            aes.IV = iv;
+
+            using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            return _InternalCryptoPerformer(data, decryptor);
+        }
+
+        /// <summary>
+        /// Internal CryptoSuite.
+        /// </summary>
+        private static byte[] _InternalCryptoPerformer(byte[] data, ICryptoTransform cryptoTransform)
+        {
+            using var ms = new System.IO.MemoryStream();
+            using var cryptoStream = new CryptoStream(ms, cryptoTransform, CryptoStreamMode.Write);
+            cryptoStream.Write(data, 0, data.Length);
+            cryptoStream.FlushFinalBlock();
+
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// Internal CryptoSuite.
+        /// </summary>
+        private static byte[][] _InternalEncryptionKeygen(byte[] EncryptionKey, string passphrase)
+        {
+            byte[] IV = new byte[16];
+            byte[] Salt = new byte[8];
+            RNG.GetBytes(IV);
+            RNG.GetBytes(Salt);
+
+            PBKDF2 = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(passphrase), Salt, 2048, HashAlgorithmName.SHA256);
+            byte[] temp = PBKDF2.GetBytes(256);
+            byte[] key2 = temp[0..127];
+            byte[] IntegrityKey = temp[128..^0];
+
+            byte[] EncryptedKey = _InternalEncrypt(EncryptionKey, key2, IV);
+
+            return new byte[][] { EncryptedKey, IntegrityKey, Salt, IV };
+        }
+
+        /// <summary>
+        /// Internal CryptoSuite.
+        /// </summary>
+        private static byte[] _InternalRandomKeygen(int length)
+        {
+            byte[] key = new byte[length];
+            RNG.GetBytes(key);
+            return key;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Merge multiple array into one.
+        /// </summary>
+        private static T[] _InternalArrayMerger<T>(params T[][] arrays)
+        {
+            int Length = 0;
+            foreach (var item in arrays)
+            {
+                Length += item.Length;
+            }
+            T[] result = new T[Length];
+
+            Length = 0;
+            foreach (var item in arrays)
+            {
+                Array.Copy(item, 0, result, Length, item.Length);
+                Length += item.Length;
+            }
+
+            return result;
         }
 
         #endregion
