@@ -54,7 +54,7 @@ namespace MikeDev.Cryptography
         /// Compute hash of an object type <typeparamref name="T"/>
         /// </summary>
         /// <param name="obj"><typeparamref name="T"/> object to be hashed.</param>
-        public static string ComputeHash<T>(T obj) where T : IHashable
+        public static string ComputeHash<T>(T obj) where T : ICrypto
         {
             return ComputeHash(obj.GetUniqueInfo());
         }
@@ -75,6 +75,22 @@ namespace MikeDev.Cryptography
 
             return builder.ToString();
         }
+
+        #endregion
+
+        #region Encrypt/Decrypt suite
+
+        /// <summary>
+        /// Encrypt a string using passphrase.
+        /// </summary>
+        /// <param name="data">String to be encrypted.</param>
+        /// <param name="passphrase">Passphrase to encrypt data.</param>
+        public static string Encrypt(string data, string passphrase)
+        {
+
+        }
+
+        public static string Encrypt()
 
         #endregion
     }
