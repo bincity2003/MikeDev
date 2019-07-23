@@ -45,7 +45,7 @@ namespace MikeDev.Test
 
             byte[] DecryptedData = Crypter.Decrypt(EncryptedData, passphrase);
 
-            Assert.IsTrue(Crypter.ComputeHash(DecryptedData) == Crypter.ComputeHash(EncryptedData));
+            Assert.IsTrue(Crypter.ComputeHash(DecryptedData) == Crypter.ComputeHash(Data));
         }
     }
 }
