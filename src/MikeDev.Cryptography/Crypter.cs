@@ -116,7 +116,7 @@ namespace MikeDev.Cryptography
             byte[] IV = new byte[16];
             byte[] EKSalt = new byte[8];
             byte[] IntegrityKey = new byte[16];
-            byte[] EncryptedKey = new byte[16];
+            byte[] EncryptedKey = new byte[32];
 
             int Length = Data.Length - 16;
             Array.Copy(Data, Length, IV, 0, 16);
@@ -127,8 +127,8 @@ namespace MikeDev.Cryptography
             Length -= 16;
             Array.Copy(Data, Length, IntegrityKey, 0, 16);
 
-            Length -= 16;
-            Array.Copy(Data, Length, EncryptedKey, 0, 16);
+            Length -= 32;
+            Array.Copy(Data, Length, EncryptedKey, 0, 32);
 
             byte[] EncryptedData = new byte[Length];
             Array.Copy(Data, 0, EncryptedData, 0, Length);
@@ -148,7 +148,7 @@ namespace MikeDev.Cryptography
             using var aes = Aes.Create();
             aes.KeySize = 128;
             aes.BlockSize = 128;
-            aes.Padding = PaddingMode.Zeros;
+            // aes.Padding = PaddingMode.PKCS7;
 
             aes.Key = key;
             aes.IV = iv;
@@ -165,7 +165,7 @@ namespace MikeDev.Cryptography
             using var aes = Aes.Create();
             aes.KeySize = 128;
             aes.BlockSize = 128;
-            aes.Padding = PaddingMode.Zeros;
+            // aes.Padding = PaddingMode.PKCS7;
 
             aes.Key = key;
             aes.IV = iv;
@@ -214,9 +214,9 @@ namespace MikeDev.Cryptography
                                                         string passphrase)
         {
             PBKDF2 = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(passphrase), Salt, 2048, HashAlgorithmName.SHA256);
-            byte[] temp = PBKDF2.GetBytes(256);
-            byte[] key2 = temp[0..127];
-            byte[] IntegrityCheckKey = temp[128..^0];
+            byte[] temp = PBKDF2.GetBytes(32);
+            byte[] key2 = temp[0..16];
+            byte[] IntegrityCheckKey = temp[16..^0];
 
             if (ComputeHash(IntegrityCheckKey) != ComputeHash(IntegrityKey))
             {
