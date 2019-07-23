@@ -30,7 +30,22 @@ namespace MikeDev.Test
         [Test]
         public void TestC()
         {
+            byte[] Data = new byte[]
+            {
+                0x12,
+                0x58,
+                0xa3,
+                0x85,
+                0x61,
+                0x00
+            };
+            string passphrase = "MikeDev@";
 
+            string EncryptedData = Crypter.Encrypt(Data, passphrase);
+
+            byte[] DecryptedData = Crypter.Decrypt(EncryptedData, passphrase);
+
+            Assert.IsTrue(Crypter.ComputeHash(DecryptedData) == Crypter.ComputeHash(EncryptedData));
         }
     }
 }
