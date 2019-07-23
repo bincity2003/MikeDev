@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MikeDev.Cryptography
+﻿namespace MikeDev.Cryptography
 {
     /// <summary>
     /// Class implementing IHashable can be used in MikeDev.Cryptography suite
