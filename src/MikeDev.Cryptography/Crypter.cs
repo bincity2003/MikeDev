@@ -198,9 +198,9 @@ namespace MikeDev.Cryptography
             RNG.GetBytes(Salt);
 
             PBKDF2 = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(passphrase), Salt, 2048, HashAlgorithmName.SHA256);
-            byte[] temp = PBKDF2.GetBytes(256);
-            byte[] key2 = temp[0..127];
-            byte[] IntegrityKey = temp[128..^0];
+            byte[] temp = PBKDF2.GetBytes(32);
+            byte[] key2 = temp[0..16];
+            byte[] IntegrityKey = temp[16..^0];
 
             byte[] EncryptedKey = _InternalEncrypt(EncryptionKey, key2, IV);
 
