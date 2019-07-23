@@ -10,7 +10,7 @@ namespace MikeDev.Cryptography
     public static class Crypter
     {
         private static readonly RandomNumberGenerator RNG = RandomNumberGenerator.Create();
-        private static readonly SHA512 sha512 = SHA512.Create();
+        private static readonly SHA512 SHA512 = SHA512.Create();
         private static Rfc2898DeriveBytes PBKDF2;
 
         #region ComputeHash suite
@@ -67,7 +67,7 @@ namespace MikeDev.Cryptography
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         private static string _InternalComputeHash(byte[] byteArray)
         {
-            byteArray = sha512.ComputeHash(byteArray);
+            byteArray = SHA512.ComputeHash(byteArray);
 
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < byteArray.Length; i++)
