@@ -104,6 +104,11 @@ namespace MikeDev.Cryptography
             return Convert.ToBase64String(result);
         }
 
+        /// <summary>
+        /// Decrypt a base64 string using passphrase
+        /// </summary>
+        /// <param name="encryptedData"></param>
+        /// <param name="passphrase"></param>
         public static byte[] Decrypt(string encryptedData, string passphrase)
         {
             byte[] Data = Convert.FromBase64String(encryptedData);
@@ -127,6 +132,10 @@ namespace MikeDev.Cryptography
 
             byte[] EncryptedData = new byte[Length];
             Array.Copy(Data, 0, EncryptedData, 0, Length);
+
+            byte[] DecryptionKey = _InternalDecryptionKeygen(EncryptedKey, IntegrityKey, EKSalt, IV, passphrase);
+
+            return _InternalDecrypt(EncryptedData, DecryptionKey, IV);
         }
 
         #region External CryptoSuite
@@ -196,6 +205,28 @@ namespace MikeDev.Cryptography
             byte[] EncryptedKey = _InternalEncrypt(EncryptionKey, key2, IV);
 
             return new byte[][] { EncryptedKey, IntegrityKey, Salt, IV };
+        }
+
+        /// <summary>
+        /// Internal CryptoSuite.
+        /// </summary>
+        private static byte[] _InternalDecryptionKeygen(byte[] EncryptedKey, byte[] IntegrityKey, byte[] Salt, byte[] IV,
+                                                        string passphrase)
+        {
+            PBKDF2 = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(passphrase), Salt, 2048, HashAlgorithmName.SHA256);
+            byte[] temp = PBKDF2.GetBytes(256);
+            byte[] key2 = temp[0..127];
+            byte[] IntegrityCheckKey = temp[128..^0];
+
+            if (ComputeHash(IntegrityCheckKey) != ComputeHash(IntegrityKey))
+            {
+                throw new Exception("Wrong passphrase or data is tampered!");
+            }
+            else
+            {
+                byte[] DecryptionKey = _InternalDecrypt(EncryptedKey, key2, IV);
+                return DecryptionKey;
+            }
         }
 
         /// <summary>
